@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: Checklist API - Home Renting
+  version: 0.1.0
+  description: Draft read-only contract for composing jurisdiction-aware home-renting checklists.
+paths:
+  /api/v1/checklists/rent-home:
+    get:
+      summary: Get a composed home-renting checklist
+      parameters:
+        - in: query
+          name: country
+          schema: { type: string, example: US }
+        - in: query
+          name: state
+          schema: { type: string, example: CA }
+        - in: query
+          name: county
+          schema: { type: string, example: San Joaquin }
+        - in: query
+          name: city
+          schema: { type: string, example: Manteca }
+        - in: query
+          name: phase
+          schema:
+            type: string
+            enum: [plan, prepare, search, verify, evaluate, apply, lease, move-in, tenancy, rights, assistance, risk, household, move-out]
+        - in: query
+          name: expand
+          schema:
+            type: string
+            enum: [none, micro]
+            default: none
+      responses:
+        '200':
+          description: Composed checklist from generic through matching jurisdiction layers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComposedChecklist'
+  /api/v1/checklists/rent-home/layers:
+    get:
+      summary: List available home-renting jurisdiction layers
+      responses:
+        '200':
+          description: Available layers
+  /api/v1/micro-checklists/{id}:
+    get:
+      summary: Get one reusable micro checklist
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Micro checklist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicroChecklist'
+        '404':
+          description: Micro checklist not found
+components:
+  schemas:
+    Source:
+      type: object
+      required: [title, authority, url]
+      properties:
+        title: { type: string }
+        authority: { type: string }
+        url: { type: string, format: uri }
+    Location:
+      type: object
+      properties:
+        country: { type: string }
+        state: { type: string }
+        county: { type: string }
+        city: { type: string }
+    Task:
+      type: object
+      required: [semantic_key, title, phase, source_layer]
+      properties:
+        sequence: { type: integer }
+        phase: { type: string }
+        semantic_key: { type: string }
+        title: { type: string }
+        condition: { type: string }
+        micro_checklist_id: { type: string }
+        source_layer: { type: string }
+        source_location: { $ref: '#/components/schemas/Location' }
+        micro_checklist:
+          oneOf:
+            - $ref: '#/components/schemas/MicroChecklist'
+            - type: 'null'
+    MicroChecklist:
+      type: object
+      required: [id, title, steps]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        steps:
+          type: array
+          items: { type: string }
+    AppliedLayer:
+      type: object
+      required: [id, level]
+      properties:
+        id: { type: string }
+        level: { type: string }
+        location: { $ref: '#/components/schemas/Location' }
+        sources:
+          type: array
+          items: { $ref: '#/components/schemas/Source' }
+    ComposedChecklist:
+      type: object
+      required: [id, title, status, risk_level, applied_layers, tasks]
+      properties:
+        id: { type: string, const: rent-home }
+        title: { type: string }
+        version: { type: string }
+        status: { type: string }
+        risk_level: { type: string }
+        requested_location: { $ref: '#/components/schemas/Location' }
+        applied_layers:
+          type: array
+          items: { $ref: '#/components/schemas/AppliedLayer' }
+        tasks:
+          type: array
+          items: { $ref: '#/components/schemas/Task' }
+        unresolved_micro_checklist_ids:
+          type: array
+          items: { type: string }
+        disclaimer: { type: string }

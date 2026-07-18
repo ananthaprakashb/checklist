@@ -1,0 +1,14 @@
+{
+  "name": "checklist-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Location-aware checklist catalog and deterministic composition API",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test",
+    "check": "node --check src/server.js && node --check src/app.js && node --check src/catalog.js && node --check src/composition.js"
+  }
+}

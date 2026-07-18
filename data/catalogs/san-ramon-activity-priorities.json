@@ -1,0 +1,28 @@
+{
+  "id": "san-ramon-activity-priorities",
+  "version": "0.1.0",
+  "status": "draft",
+  "location": {"country": "US", "state": "CA", "county": "Contra Costa", "city": "San Ramon"},
+  "method": {
+    "criteria": ["frequency", "consequence_of_missing_step", "number_of_agencies", "document_burden", "deadline_sensitivity", "reuse_potential"],
+    "priority_scale": "P0 highest through P3 exploratory",
+    "source_policy": "Prefer official federal, state, county, city, school, utility and special-district sources."
+  },
+  "activities": [
+    {"id":"move-to-san-ramon","priority":"P0","category":"resident-onboarding","reason":"Cross-agency address, utility, vehicle, voter, school and emergency setup with deadlines.","build_status":"seeded"},
+    {"id":"prepare-household-emergency","priority":"P0","category":"safety","reason":"Local earthquake, wildfire, flood and hazardous-material risks; missed steps can affect life safety.","build_status":"seeded"},
+    {"id":"complete-home-project","priority":"P0","category":"property","reason":"Permit selection, plan review, contractor, inspection and closeout dependencies create cost and safety risk.","build_status":"seeded"},
+    {"id":"report-city-service-issue","priority":"P0","category":"civic-service","reason":"Residents must distinguish emergencies, urgent non-emergencies and trackable service requests.","build_status":"seeded"},
+    {"id":"register-recreation-program","priority":"P1","category":"family-recreation","reason":"Seasonal registration windows, residency rules, fees, inclusion needs and refund policies.","build_status":"seeded"},
+    {"id":"start-san-ramon-business","priority":"P1","category":"business","reason":"Entity, zoning, permits, business license, home occupation and county/state dependencies.","build_status":"researched"},
+    {"id":"enroll-child-in-school","priority":"P1","category":"education","reason":"Address verification, district assignment, records, health forms and deadlines.","build_status":"backlog"},
+    {"id":"hire-home-service-contractor","priority":"P1","category":"consumer-protection","reason":"License, insurance, scope, permits, payment schedule and completion evidence.","build_status":"backlog"},
+    {"id":"prepare-for-vacation-home-absence","priority":"P1","category":"safety","reason":"Security, utilities, deliveries, emergency contacts and optional police vacation-check service.","build_status":"backlog"},
+    {"id":"adopt-or-license-pet","priority":"P2","category":"animals","reason":"Shelter, licensing, vaccination, housing and emergency-preparedness dependencies.","build_status":"backlog"},
+    {"id":"participate-in-city-meeting","priority":"P2","category":"civic-participation","reason":"Agenda review, comment deadlines, evidence preparation and follow-up.","build_status":"backlog"},
+    {"id":"organize-neighborhood-event","priority":"P2","category":"community","reason":"Facility, insurance, food, alcohol, noise, traffic and special-event permit branches.","build_status":"backlog"},
+    {"id":"use-local-library-services","priority":"P2","category":"learning","reason":"Card eligibility, identity/address evidence, digital access and account responsibilities.","build_status":"backlog"},
+    {"id":"prepare-for-wildfire-season","priority":"P0","category":"safety","reason":"Evacuation, alerts, defensible space, insurance and household readiness.","build_status":"backlog"},
+    {"id":"prepare-for-earthquake","priority":"P0","category":"safety","reason":"Local fault risk requires supplies, family communication, utility safety and recovery planning.","build_status":"backlog"}
+  ]
+}

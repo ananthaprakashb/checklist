@@ -1,0 +1,102 @@
+{
+  "id": "lease-property-landlord",
+  "title": "Lease a residential property as a landlord",
+  "type": "macro",
+  "version": "0.1.0",
+  "status": "draft",
+  "risk_level": "high",
+  "description": "A jurisdiction-aware checklist for preparing, marketing, screening, leasing, managing and closing a residential tenancy as a landlord.",
+  "composition": {"strategy":"inherit-and-overlay","deduplicate_by":"semantic_key","order_by":["phase","sequence"],"preserve_source_layer":true,"expand_micro":true},
+  "layers": [
+    {
+      "id":"lease-property-landlord-generic","level":"generic","location":null,
+      "tasks":[
+        {"sequence":10,"phase":"strategy","semantic_key":"define-landlord-rental-plan","title":"Define target tenancy, rent, term, included services, pet policy and management approach","micro_checklist_id":"define-landlord-rental-plan"},
+        {"sequence":20,"phase":"readiness","semantic_key":"prepare-rental-property","title":"Prepare the property for safe, clean and documented occupancy","micro_checklist_id":"prepare-rental-property"},
+        {"sequence":30,"phase":"readiness","semantic_key":"assemble-landlord-records","title":"Assemble ownership, insurance, appliance, warranty, permit and maintenance records","micro_checklist_id":"assemble-landlord-records"},
+        {"sequence":40,"phase":"pricing","semantic_key":"set-rent-and-costs","title":"Set rent and lawful charges using market evidence and an all-in ownership budget","micro_checklist_id":"set-rent-and-costs"},
+        {"sequence":50,"phase":"marketing","semantic_key":"create-compliant-rental-listing","title":"Create an accurate, fair-housing-compliant listing and showing process","micro_checklist_id":"create-compliant-rental-listing"},
+        {"sequence":60,"phase":"screening","semantic_key":"define-written-screening-criteria","title":"Create written, consistently applied applicant screening criteria","micro_checklist_id":"define-written-screening-criteria"},
+        {"sequence":70,"phase":"screening","semantic_key":"process-rental-applications","title":"Receive, secure, evaluate and document rental applications consistently","micro_checklist_id":"process-rental-applications"},
+        {"sequence":80,"phase":"screening","semantic_key":"verify-applicant-information","title":"Verify identity, income, rental history, references and screening reports lawfully","micro_checklist_id":"verify-applicant-information"},
+        {"sequence":90,"phase":"decision","semantic_key":"document-rental-decision","title":"Document approval, conditional approval or denial and send required notices","micro_checklist_id":"document-rental-decision"},
+        {"sequence":100,"phase":"lease","semantic_key":"prepare-residential-lease","title":"Prepare a complete lease, addenda, disclosures and house rules","micro_checklist_id":"prepare-residential-lease"},
+        {"sequence":110,"phase":"funds","semantic_key":"collect-move-in-funds","title":"Calculate, collect, receipt and securely account for move-in funds","micro_checklist_id":"collect-move-in-funds"},
+        {"sequence":120,"phase":"move-in","semantic_key":"complete-landlord-move-in","title":"Complete condition documentation, key handoff, utility confirmation and orientation","micro_checklist_id":"complete-landlord-move-in"},
+        {"sequence":130,"phase":"management","semantic_key":"operate-rental-tenancy","title":"Manage rent, records, repairs, notices, entries and tenant communications","micro_checklist_id":"operate-rental-tenancy"},
+        {"sequence":140,"phase":"renewal","semantic_key":"review-renewal-or-termination","title":"Review renewal, rent change or lawful termination options before deadlines","micro_checklist_id":"review-renewal-or-termination"},
+        {"sequence":150,"phase":"move-out","semantic_key":"complete-landlord-move-out","title":"Complete inspection, possession recovery, accounting, repairs and deposit disposition","micro_checklist_id":"complete-landlord-move-out"}
+      ],"sources":[]
+    },
+    {
+      "id":"lease-property-landlord-us","level":"country","location":{"country":"US"},
+      "tasks":[
+        {"sequence":210,"phase":"compliance","semantic_key":"landlord-federal-fair-housing","title":"Build advertising, screening, accommodation and decision processes around federal fair-housing requirements","micro_checklist_id":"comply-federal-fair-housing"},
+        {"sequence":220,"phase":"screening","semantic_key":"landlord-fcra-screening","title":"Follow consumer-report authorization, permissible-purpose and adverse-action requirements","micro_checklist_id":"comply-tenant-screening-fcra"},
+        {"sequence":230,"phase":"disclosure","semantic_key":"landlord-lead-disclosure","title":"For most pre-1978 housing, provide the federal lead-based paint disclosure package","condition":"property.year_built < 1978","micro_checklist_id":"provide-lead-paint-disclosure"},
+        {"sequence":240,"phase":"tax","semantic_key":"landlord-tax-recordkeeping","title":"Separate rental income, expenses, deposits and capital-improvement records for tax reporting","micro_checklist_id":"organize-rental-tax-records"}
+      ],
+      "sources":[
+        {"title":"Fair Housing Rights and Obligations","authority":"U.S. Department of Housing and Urban Development","url":"https://www.hud.gov/stat/fheo/rights-obligations"},
+        {"title":"Using Consumer Reports: What Landlords Need to Know","authority":"Federal Trade Commission","url":"https://www.ftc.gov/business-guidance/resources/using-consumer-reports-what-landlords-need-know"},
+        {"title":"Lead-Based Paint Disclosure Rule","authority":"U.S. Environmental Protection Agency","url":"https://www.epa.gov/lead/real-estate-disclosures-about-potential-lead-hazards"}
+      ]
+    },
+    {
+      "id":"lease-property-landlord-us-ca","level":"state","location":{"country":"US","state":"CA"},
+      "tasks":[
+        {"sequence":310,"phase":"compliance","semantic_key":"review-current-ca-landlord-guide","title":"Review the current California landlord-tenant guide and current statutes before each new tenancy","micro_checklist_id":"review-current-landlord-law"},
+        {"sequence":320,"phase":"screening","semantic_key":"ca-screening-process-and-fees","title":"Use written screening criteria, application-order controls, lawful fees, receipts, refunds and report handling","micro_checklist_id":"run-ca-application-screening"},
+        {"sequence":330,"phase":"lease","semantic_key":"ca-rental-disclosures","title":"Identify and deliver all property- and tenancy-specific California disclosures and notices","micro_checklist_id":"prepare-ca-rental-disclosures"},
+        {"sequence":340,"phase":"funds","semantic_key":"ca-security-deposit-compliance","title":"Apply California deposit limits, receipt, documentation, storage and permitted-use rules","micro_checklist_id":"manage-ca-security-deposit"},
+        {"sequence":350,"phase":"move-in","semantic_key":"ca-condition-photo-record","title":"Create the required or prudent dated move-in condition and photographic record","micro_checklist_id":"create-landlord-condition-record"},
+        {"sequence":360,"phase":"management","semantic_key":"ca-habitability-and-repairs","title":"Maintain habitability and operate a documented repair intake, prioritization and completion process","micro_checklist_id":"manage-ca-habitability-repairs"},
+        {"sequence":370,"phase":"management","semantic_key":"ca-lawful-entry","title":"Use lawful purpose, timing and notice procedures before entering the unit","micro_checklist_id":"perform-lawful-landlord-entry"},
+        {"sequence":380,"phase":"management","semantic_key":"ca-rent-reporting-offer","title":"Determine and fulfill any obligation to offer positive rent-payment reporting","micro_checklist_id":"offer-positive-rent-reporting"},
+        {"sequence":390,"phase":"renewal","semantic_key":"ca-rent-and-just-cause","title":"Determine Tenant Protection Act coverage, exemptions, rent limits, notice and just-cause requirements","micro_checklist_id":"evaluate-ca-rent-and-termination"},
+        {"sequence":400,"phase":"enforcement","semantic_key":"ca-lawful-notice-and-eviction","title":"Use correct notices and court process; never use self-help eviction methods","micro_checklist_id":"handle-ca-lease-violation"},
+        {"sequence":410,"phase":"move-out","semantic_key":"ca-pre-move-out-inspection","title":"Provide statutory pre-move-out inspection information and conduct it correctly when requested","micro_checklist_id":"conduct-ca-initial-inspection"},
+        {"sequence":420,"phase":"move-out","semantic_key":"ca-deposit-accounting","title":"Complete photographs, lawful deductions, receipts, itemization and deposit return within the statutory timeline","micro_checklist_id":"complete-ca-deposit-accounting"}
+      ],
+      "sources":[
+        {"title":"2026 California Landlord/Tenant Guide","authority":"California Department of Real Estate","url":"https://www.dre.ca.gov/publications/ResourceGuidebook/"},
+        {"title":"Landlord-Tenant Issues","authority":"California Department of Justice","url":"https://oag.ca.gov/tenants"},
+        {"title":"Landlords and Tenants","authority":"California Courts Self-Help","url":"https://selfhelp.courts.ca.gov/landlords-and-tenants"},
+        {"title":"California Civil Code section 1950.5","authority":"California Legislative Information","url":"https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.5"}
+      ]
+    },
+    {
+      "id":"lease-property-landlord-us-ca-san-joaquin","level":"county","location":{"country":"US","state":"CA","county":"San Joaquin"},
+      "tasks":[
+        {"sequence":510,"phase":"compliance","semantic_key":"san-joaquin-fair-housing-landlord","title":"Use San Joaquin fair-housing education and assistance when reviewing policies, accommodations or disputes","micro_checklist_id":"use-local-landlord-fair-housing-resources"},
+        {"sequence":520,"phase":"readiness","semantic_key":"san-joaquin-environmental-health","title":"Identify county environmental-health requirements and complaint channels relevant to the property","micro_checklist_id":"verify-county-rental-health-requirements"},
+        {"sequence":530,"phase":"risk","semantic_key":"san-joaquin-flood-and-emergency","title":"Review flood, emergency and insurance implications and prepare tenant emergency information","micro_checklist_id":"prepare-rental-emergency-information"},
+        {"sequence":540,"phase":"assistance","semantic_key":"san-joaquin-housing-programs","title":"If accepting assisted tenants, verify inspection, contract and payment requirements with the administering agency","condition":"landlord.accepts_housing_assistance == true","micro_checklist_id":"prepare-landlord-housing-assistance-participation"}
+      ],
+      "sources":[
+        {"title":"San Joaquin Fair Housing","authority":"San Joaquin Fair Housing","url":"https://sjfairhousing.com/"},
+        {"title":"Environmental Health","authority":"San Joaquin County","url":"https://www.sjgov.org/department/envhealth"},
+        {"title":"FEMA Flood Map Service Center","authority":"Federal Emergency Management Agency","url":"https://msc.fema.gov/portal/home"}
+      ]
+    },
+    {
+      "id":"lease-property-landlord-us-ca-san-joaquin-manteca","level":"city","location":{"country":"US","state":"CA","county":"San Joaquin","city":"Manteca"},
+      "tasks":[
+        {"sequence":610,"phase":"readiness","semantic_key":"manteca-zoning-and-use","title":"Verify that the dwelling, unit count, accessory unit and intended rental use are lawful for the address","micro_checklist_id":"verify-manteca-rental-use"},
+        {"sequence":620,"phase":"readiness","semantic_key":"manteca-permits-and-code","title":"Resolve visible code, permit, safety and property-maintenance issues before marketing","micro_checklist_id":"prepare-manteca-code-compliance"},
+        {"sequence":630,"phase":"lease","semantic_key":"manteca-utility-responsibility","title":"Assign City water, sewer and solid-waste responsibility clearly in the lease and complete required account steps","micro_checklist_id":"configure-manteca-rental-utilities"},
+        {"sequence":640,"phase":"move-in","semantic_key":"manteca-trash-and-service-orientation","title":"Give tenants collection-day, cart-placement and local service information","micro_checklist_id":"provide-manteca-service-orientation"},
+        {"sequence":650,"phase":"management","semantic_key":"manteca-code-complaint-response","title":"Respond promptly to City code-enforcement notices and document correction","micro_checklist_id":"respond-manteca-code-enforcement"},
+        {"sequence":660,"phase":"dispute","semantic_key":"manteca-private-dispute-routing","title":"Route private landlord-tenant disputes to legal or fair-housing resources and code matters to the City","micro_checklist_id":"route-manteca-rental-dispute"},
+        {"sequence":670,"phase":"move-out","semantic_key":"manteca-utility-transition","title":"Coordinate final meter, account-holder and solid-waste service transition at turnover","micro_checklist_id":"transition-manteca-rental-utilities"}
+      ],
+      "sources":[
+        {"title":"Code Enforcement","authority":"City of Manteca","url":"https://www.manteca.gov/departments/police-department/services-division/code-enforcement"},
+        {"title":"Utility Information","authority":"City of Manteca","url":"https://www.manteca.gov/departments/finance-department/utility-information"},
+        {"title":"Residential Trash Collection","authority":"City of Manteca","url":"https://www.manteca.gov/departments/public-works/solid-waste-division/residential-trash-collection"},
+        {"title":"City Attorney FAQs","authority":"City of Manteca","url":"https://www.manteca.gov/departments/city-attorney/frequently-asked-questions"}
+      ]
+    }
+  ],
+  "unresolved_micro_checklist_ids":["organize-rental-tax-records","prepare-ca-rental-disclosures","offer-positive-rent-reporting","prepare-landlord-housing-assistance-participation"]
+}

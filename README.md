@@ -2,99 +2,139 @@
 
 A public, curated API of reusable checklists for everyday, technical, personal, travel, household, administrative, work, event, and other activities.
 
-The project starts at the **micro-task level**. Each micro checklist captures one small activity—such as verifying a reservation, charging essential devices, preparing for an appointment, capturing a software error, or checking a route. Larger **macro checklists** are assembled by composing these reusable building blocks.
+The project starts at the **micro-task level**. Each micro checklist captures one small activity. Larger **macro checklists** are assembled by composing these reusable building blocks.
+
+## Run the HTTP server
+
+Requirements: Node.js 20 or newer. The first implementation has no runtime dependencies.
+
+```bash
+npm start
+```
+
+The default address is `http://localhost:3000`. Override it with `HOST` and `PORT`.
+
+```bash
+HOST=127.0.0.1 PORT=8080 npm start
+npm test
+npm run check
+```
+
+Example requests:
+
+```bash
+curl http://localhost:3000/api/v1/health
+curl 'http://localhost:3000/api/v1/activities?city=San%20Ramon&priority=P0'
+curl 'http://localhost:3000/api/v1/checklists/move-to-san-ramon?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&expand=micro'
+```
+
+Composition with structured context:
+
+```bash
+curl -X POST http://localhost:3000/api/v1/checklists/compose \
+  -H 'content-type: application/json' \
+  -d '{
+    "checklist_id": "buy-home",
+    "location": {"country":"US","state":"CA","county":"Contra Costa","city":"San Ramon"},
+    "context": {"property":{"year_built":1965}},
+    "expand_micro": true
+  }'
+```
+
+The engine loads version-controlled JSON, selects matching jurisdiction layers, evaluates supported conditions against explicit context, deduplicates by `semantic_key`, lets more-specific overlays replace inherited tasks, preserves source layer and location, orders tasks, combines authoritative sources and optionally expands micro-checklist steps.
 
 ## Project vision
 
 Checklist API should make it easy to:
 
-- Discover a trusted checklist for a common activity.
+- Discover activities that benefit from a checklist.
+- Find a trusted checklist for a common activity.
 - Reuse the same micro checklist across many larger workflows.
 - Compose micro checklists into an ordered macro checklist.
+- Apply country, state, county, city and other authority overlays.
+- Preserve authoritative sources and freshness metadata.
 - Curate and improve checklist quality through public review.
-- Expose stable, versioned checklist data through a simple API.
-- Add contextual variants without duplicating entire checklists.
 
-## Example
+## San Ramon activity discovery slice
 
-A macro task such as **prepare for an in-person appointment** could combine:
+The first broader local catalog researches activities that commonly require multiple steps, records, deadlines, agencies or safety decisions in San Ramon.
 
-- Prepare for an appointment.
-- Check the weather before leaving.
-- Check the route and departure time.
-- Charge essential devices.
-- Pack identification.
-- Secure the home before leaving.
+Initial seeded checklists:
 
-Each item is independently useful and can also be reused in travel, work, school, healthcare, government, and event workflows.
+- Move to San Ramon.
+- Prepare a San Ramon household for emergencies.
+- Complete a permitted home project.
+- Report a city service or safety issue.
+- Register for a recreation class, camp or program.
 
-## First vertical slice: buying a home
+Priority research also identified wildfire preparation, earthquake preparation, starting a business, school enrollment, contractor hiring, vacation-home preparation, pet services, civic participation, neighborhood events and library use.
 
-The first researched vertical slice is a layered checklist for buying a home. It demonstrates how one generic workflow can inherit increasingly specific jurisdiction overlays without duplicating the complete checklist.
-
-Available layers:
-
-```text
-generic
-  └── United States
-       └── California
-            └── Contra Costa County
-                 └── San Ramon
+```http
+GET /api/v1/activities?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&priority=P0
+GET /api/v1/checklists?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon
+GET /api/v1/checklists/move-to-san-ramon?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&expand=micro
 ```
 
-Example request:
+Files:
+
+- [`data/catalogs/san-ramon-activity-priorities.json`](data/catalogs/san-ramon-activity-priorities.json) — researched and prioritized activity opportunities.
+- [`data/macros/san-ramon-resident-activities.json`](data/macros/san-ramon-resident-activities.json) — five initial layered macro checklists.
+- [`data/micro/san-ramon-resident-activities.json`](data/micro/san-ramon-resident-activities.json) — reusable resident sub-checklists.
+- [`openapi/san-ramon-activities.yaml`](openapi/san-ramon-activities.yaml) — activity discovery and checklist composition contract.
+- [`docs/SAN_RAMON_ACTIVITY_RESEARCH.md`](docs/SAN_RAMON_ACTIVITY_RESEARCH.md) — research method, priorities, sources and roadmap.
+
+## Location-aware housing vertical slices
+
+### Buying a home in San Ramon
 
 ```http
 GET /api/v1/checklists/buy-home?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&expand=micro
 ```
 
-The composed response should:
+Files:
 
-1. Start with the generic home-buying lifecycle.
-2. Merge U.S. mortgage and federal-protection tasks.
-3. Merge California disclosure, escrow, title, hazard, tax, and insurance tasks.
-4. Merge Contra Costa County assessment, supplemental-tax, recording, and exemption tasks.
-5. Merge San Ramon zoning, permit, utility, wildfire, school-boundary, and local-context tasks.
-6. Deduplicate tasks by stable semantic key.
-7. Preserve the originating jurisdiction and authoritative sources.
-8. Optionally expand reusable micro-checklist steps.
+- [`data/macros/buy-home.json`](data/macros/buy-home.json)
+- [`data/micro/home-buying.json`](data/micro/home-buying.json)
+- [`openapi/home-buying.yaml`](openapi/home-buying.yaml)
+
+### Renting a home in Manteca
+
+```http
+GET /api/v1/checklists/rent-home?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
+```
 
 Files:
 
-- [`data/macros/buy-home.json`](data/macros/buy-home.json) — layered macro checklist and authoritative references.
-- [`data/micro/home-buying.json`](data/micro/home-buying.json) — initial reusable micro checklists for complex tasks.
-- [`openapi/home-buying.yaml`](openapi/home-buying.yaml) — draft API contract for the vertical slice.
+- [`data/macros/rent-home.json`](data/macros/rent-home.json)
+- [`data/micro/home-renting.json`](data/micro/home-renting.json)
+- [`openapi/home-renting.yaml`](openapi/home-renting.yaml)
+- [`docs/RENT_HOME_MANTECA.md`](docs/RENT_HOME_MANTECA.md)
 
-The content is marked `draft` and `high` risk. It is educational, must retain citations, and requires periodic review because laws, forms, programs, maps, fees, and agency procedures change.
+### Leasing a property as a landlord in Manteca
 
-## Initial micro-checklist areas
+```http
+GET /api/v1/checklists/lease-property-landlord?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
+```
 
-The first catalog is organized around broadly reusable activities:
+Files:
 
-| Area | Example micro activities |
-|---|---|
-| Daily and personal | Charge devices, pack identification, check weather, prepare medications, secure the home |
-| Travel and transportation | Verify reservations, check routes, prepare a vehicle, prepare for transit, pack a day bag |
-| Technical | Restart safely, capture an error, prepare a deployment, create a secure account, back up a file |
-| Administrative | Prepare for an appointment, submit an online form, pay a bill |
-| Shopping and household | Prepare a shopping list, receive a package, leave a room clean |
-| Events and work | Prepare for a meeting, host a small gathering |
-| Housing | Compare loans, inspect a home, review disclosures, verify permits, estimate taxes, review HOA records, complete closing |
+- [`data/macros/lease-property-landlord.json`](data/macros/lease-property-landlord.json)
+- [`data/micro/property-leasing-landlord.json`](data/micro/property-leasing-landlord.json)
+- [`openapi/property-leasing-landlord.yaml`](openapi/property-leasing-landlord.yaml)
 
-The proposed checklist steps and content-quality rules are documented in the [High-Level Design](docs/HIGH_LEVEL_DESIGN.md).
+## Implemented public API
 
-## Proposed public API
-
-Initial base path:
+Base path:
 
 ```text
 /api/v1
 ```
 
-Planned endpoints:
+Endpoints:
 
 ```http
 GET  /api/v1/health
+GET  /api/v1/activities
 GET  /api/v1/checklists
 GET  /api/v1/checklists/{id}
 GET  /api/v1/checklists/{id}/layers
@@ -104,21 +144,17 @@ GET  /api/v1/tags
 POST /api/v1/checklists/compose
 ```
 
-Example queries:
-
-```http
-GET /api/v1/checklists?type=micro&category=travel&tag=preparation
-GET /api/v1/checklists/buy-home?country=US&state=CA
-GET /api/v1/checklists/buy-home?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon
-```
-
-The first implementation should prioritize read-only catalog endpoints. Composition can initially be deterministic and non-persistent.
+The service is read-only and non-persistent. Data is loaded at process startup from the repository JSON files.
 
 ## Core data concepts
 
+### Activity opportunity
+
+A researched activity that is scored by frequency, consequences, agency count, document burden, deadline sensitivity and reuse potential. It may be `seeded`, `researched` or in the `backlog`.
+
 ### Micro checklist
 
-The smallest independently useful activity. It has a stable ID, category, tags, estimated time, version, status, and ordered steps.
+The smallest independently useful activity. It has a stable ID, category, tags, estimated time, version, status and ordered steps.
 
 ### Macro checklist
 
@@ -126,100 +162,41 @@ A larger workflow made by referencing ordered micro-checklist IDs, with optional
 
 ### Jurisdiction layer
 
-A country, state, county, city, or other authority-specific overlay. It contains only the tasks that supplement or refine its parent layers. A composed response records `source_layer` and `source_location` for traceability.
+A country, state, county, city, district or other authority-specific overlay. It contains only tasks that supplement or refine its parent layers. A composed response records `source_layer` and `source_location` for traceability.
 
 ### Composition
 
-A deterministic process that resolves dependencies, applies conditions, merges jurisdiction overlays, removes duplicate steps, orders actions, and preserves source checklist IDs for traceability.
+A deterministic process that resolves dependencies, applies conditions, merges jurisdiction overlays, removes duplicates, orders actions and preserves source checklist IDs.
 
-## Architecture direction
+## Content decomposition rule
+
+Create or reference a micro checklist when a task:
+
+- Has multiple ordered actions.
+- Can cause meaningful safety, legal, financial or deadline consequences.
+- Requires evidence, comparison, verification or escalation.
+- Has conditional branches or a professional handoff.
+- Is reusable in another activity.
+
+## Runtime architecture
 
 ```text
 API Consumer
     |
     v
-HTTP API and Validation
+Node.js HTTP Server
     |
-    +--> Checklist Query Service --> Curated Checklist Repository
+    +--> Activity Discovery Service
+    |
+    +--> Checklist Query Service --> Version-controlled JSON repository
     |
     +--> Composition Service
-            +--> Jurisdiction Resolver
-            +--> Dependency Resolver
-            +--> Step Deduplicator
-            +--> Condition Evaluator
+            +--> Jurisdiction Matcher
+            +--> Restricted Condition Evaluator
+            +--> Semantic-key Deduplicator
+            +--> Source Aggregator
+            +--> Micro-checklist Expander
             +--> Ordering Rules
 ```
 
-For the first release, version-controlled JSON or YAML files should be the source of truth. This keeps checklist contributions public, reviewable, testable, and easy to deploy without requiring a database.
-
-## Content decomposition rule
-
-A macro task should reference a micro checklist when any of these are true:
-
-- The task has multiple ordered actions.
-- Missing one substep can cause meaningful cost, delay, safety, legal, financial, or privacy risk.
-- The activity is reusable in another macro workflow.
-- The task requires evidence, comparison, verification, or escalation.
-- The task has conditional branches or a specialized professional handoff.
-
-The home-buying slice currently expands the highest-value examples, including Loan Estimate comparison, independent inspection, HOA review, wire verification, California hazard review, Contra Costa supplemental-tax preparation, San Ramon permit review, zoning review, utility identification, and final walk-through. Remaining referenced IDs are intentionally discoverable through `unresolved_micro_checklist_ids` until curated.
-
-## Delivery plan
-
-### Phase 0 — Documentation foundation
-
-- Define the product and architecture.
-- Identify initial micro activities.
-- Document checklist quality and composition rules.
-
-### Phase 1 — Data foundation
-
-- Add checklist JSON Schema.
-- Add approximately 20 curated micro checklists.
-- Add data validation and contribution guidance.
-- Validate jurisdiction inheritance and source metadata.
-
-### Phase 2 — Read-only API
-
-- Implement health, list, get, layer, and micro-checklist endpoints.
-- Add category, tag, location, phase, and text filtering.
-- Publish an OpenAPI contract.
-- Add unit, integration, and contract tests.
-
-### Phase 3 — Composition
-
-- Add deterministic macro-checklist composition.
-- Resolve jurisdiction layers, dependencies, and conditions.
-- Deduplicate and order steps.
-- Return unresolved micro references and source freshness metadata.
-
-### Phase 4 — Scale and curation
-
-- Add localization, indexed search, editorial tooling, analytics, and optional personalization.
-- Add scheduled source review for high-risk checklist content.
-
-## Documentation
-
-- [High-Level Design](docs/HIGH_LEVEL_DESIGN.md) — goals, domain model, initial micro-checklist catalog, API proposal, architecture, curation, safety, testing, and roadmap.
-- [Home-buying API contract](openapi/home-buying.yaml) — first location-aware API slice.
-
-## Current status
-
-The project is in **Phase 0/1: design and initial curated data**. The home-buying slice supplies a researched contract and seed data, but no web server has been selected or implemented yet.
-
-## Contributing
-
-Contribution guidelines will be added with the data schema. Future checklist proposals should be evaluated for:
-
-- Atomicity.
-- Reusability.
-- Clear action-oriented steps.
-- Explicit prerequisites and conditions.
-- Duplication with existing checklists.
-- Safety and authoritative sourcing where applicable.
-- Jurisdiction and source freshness.
-- Stable IDs and versioning.
-
-## License
-
-A code license and a license for curated checklist content must be selected before the first public release.
+All legal, safety, financial and government-process content is marked `draft` or risk-scoped, must retain authoritative references and requires periodic review because laws, forms, fees, programs and local procedures change.

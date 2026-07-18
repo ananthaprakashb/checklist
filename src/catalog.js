@@ -52,7 +52,13 @@ export function loadCatalog() {
   const activities = jsonFiles('data/catalogs').flatMap((path) => {
     const document = readJson(path);
     const rows = document.activities ?? document.items ?? document.checklists ?? [];
-    return rows.map((row) => ({ ...row, source_file: path.slice(ROOT.length + 1) }));
+    return rows.map((row) => ({
+      ...row,
+      location: row.location ?? document.location,
+      version: row.version ?? document.version,
+      status: row.status ?? document.status,
+      source_file: path.slice(ROOT.length + 1)
+    }));
   });
 
   const checklistById = new Map(checklists.map((item) => [item.id, item]));

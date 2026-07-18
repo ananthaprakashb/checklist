@@ -1,0 +1,209 @@
+{
+  "id": "buy-home",
+  "type": "macro",
+  "title": "Buy a home",
+  "description": "A composable home-buying checklist with generic and jurisdiction-specific overlays.",
+  "version": "0.1.0",
+  "status": "draft",
+  "category": "housing",
+  "risk_level": "high",
+  "disclaimer": "Educational checklist only. Real-estate, lending, tax, insurance, inspection, legal, and local requirements vary. Verify current requirements with licensed professionals and the cited public agencies.",
+  "composition": {
+    "strategy": "inherit-and-merge",
+    "default_order": ["generic", "country", "state", "county", "city"],
+    "deduplicate_by": ["micro_checklist_id", "semantic_key"],
+    "preserve_source_layer": true
+  },
+  "layers": [
+    {
+      "level": "generic",
+      "location": null,
+      "sections": [
+        {
+          "id": "define-needs-and-readiness",
+          "title": "Define needs and readiness",
+          "tasks": [
+            {"id":"generic-001","title":"Confirm why buying is preferable to renting for the expected occupancy period","phase":"planning","micro_checklist_id":"compare-rent-versus-buy","semantic_key":"housing.readiness.rent-buy"},
+            {"id":"generic-002","title":"Define target property type, bedrooms, accessibility, commute, schools, neighborhood, and future-space needs","phase":"planning","micro_checklist_id":"define-home-requirements","semantic_key":"housing.requirements"},
+            {"id":"generic-003","title":"Set a maximum all-in monthly housing cost, not only a purchase price","phase":"planning","micro_checklist_id":"calculate-homeownership-budget","semantic_key":"housing.budget.all-in"},
+            {"id":"generic-004","title":"Create reserves for closing, moving, immediate repairs, furnishings, and emergencies","phase":"planning","micro_checklist_id":"build-home-purchase-cash-plan","semantic_key":"housing.cash-plan"},
+            {"id":"generic-005","title":"Identify ownership, immigration, trust, estate, or co-buyer questions requiring professional advice","phase":"planning","micro_checklist_id":"identify-home-purchase-advisors","semantic_key":"housing.advisors"}
+          ]
+        },
+        {
+          "id": "prepare-financing",
+          "title": "Prepare financing",
+          "tasks": [
+            {"id":"generic-010","title":"Review credit reports and correct material errors","phase":"financing","micro_checklist_id":"review-credit-reports","semantic_key":"finance.credit-review"},
+            {"id":"generic-011","title":"Gather income, employment, asset, debt, tax, identity, and source-of-funds documents","phase":"financing","micro_checklist_id":"prepare-mortgage-document-packet","semantic_key":"finance.loan-packet"},
+            {"id":"generic-012","title":"Avoid opening new credit or making unexplained large transfers during underwriting","phase":"financing","micro_checklist_id":"protect-mortgage-qualification","semantic_key":"finance.qualification-protection"},
+            {"id":"generic-013","title":"Compare multiple lenders, loan products, rates, points, fees, and lock terms","phase":"financing","micro_checklist_id":"compare-mortgage-offers","semantic_key":"finance.compare-offers"},
+            {"id":"generic-014","title":"Verify down-payment, reserve, gift-fund, and assistance-program rules","phase":"financing","micro_checklist_id":"verify-purchase-funds","semantic_key":"finance.purchase-funds"}
+          ]
+        },
+        {
+          "id": "select-property",
+          "title": "Select and investigate a property",
+          "tasks": [
+            {"id":"generic-020","title":"Compare listings against requirements and total ownership cost","phase":"search","micro_checklist_id":"evaluate-home-listing","semantic_key":"property.listing-evaluation"},
+            {"id":"generic-021","title":"Visit at different times and evaluate noise, traffic, lighting, parking, drainage, and nearby uses","phase":"search","micro_checklist_id":"evaluate-neighborhood-on-site","semantic_key":"property.neighborhood-visit"},
+            {"id":"generic-022","title":"Review seller disclosures, title materials, surveys, permits, warranties, and available maintenance records","phase":"due-diligence","micro_checklist_id":"review-property-document-package","semantic_key":"property.document-review"},
+            {"id":"generic-023","title":"Order an independent general inspection and attend when possible","phase":"due-diligence","micro_checklist_id":"conduct-home-inspection","semantic_key":"property.general-inspection"},
+            {"id":"generic-024","title":"Add specialist inspections when indicated, including roof, foundation, sewer, electrical, HVAC, plumbing, pests, environmental hazards, pool, chimney, or solar","phase":"due-diligence","micro_checklist_id":"coordinate-specialist-home-inspections","semantic_key":"property.specialist-inspections"},
+            {"id":"generic-025","title":"Estimate near-term repairs, replacements, insurance constraints, and maintenance costs","phase":"due-diligence","micro_checklist_id":"estimate-home-repair-and-maintenance-costs","semantic_key":"property.repair-costs"},
+            {"id":"generic-026","title":"Review HOA documents, finances, insurance, litigation, rules, assessments, and rental restrictions when applicable","phase":"due-diligence","micro_checklist_id":"review-hoa-package","semantic_key":"property.hoa-review","condition":"property.has_hoa == true"}
+          ]
+        },
+        {
+          "id": "offer-and-contract",
+          "title": "Offer and contract",
+          "tasks": [
+            {"id":"generic-030","title":"Select offer price and terms using comparable sales, condition, competition, and affordability","phase":"offer","micro_checklist_id":"prepare-home-offer-strategy","semantic_key":"transaction.offer-strategy"},
+            {"id":"generic-031","title":"Understand deposit, financing, appraisal, inspection, title, document-review, sale-of-home, and insurance contingencies","phase":"offer","micro_checklist_id":"review-home-purchase-contingencies","semantic_key":"transaction.contingencies"},
+            {"id":"generic-032","title":"Track every contract deadline and responsible party","phase":"contract","micro_checklist_id":"track-real-estate-contract-deadlines","semantic_key":"transaction.deadlines"},
+            {"id":"generic-033","title":"Verify wire instructions through a trusted known channel before sending funds","phase":"contract","micro_checklist_id":"verify-real-estate-wire-instructions","semantic_key":"transaction.wire-fraud"}
+          ]
+        },
+        {
+          "id": "loan-title-insurance-close",
+          "title": "Loan, title, insurance, and closing",
+          "tasks": [
+            {"id":"generic-040","title":"Complete underwriting requests promptly and preserve copies","phase":"closing","micro_checklist_id":"complete-mortgage-underwriting","semantic_key":"closing.underwriting"},
+            {"id":"generic-041","title":"Review appraisal results and resolve valuation or condition issues","phase":"closing","micro_checklist_id":"review-home-appraisal","semantic_key":"closing.appraisal"},
+            {"id":"generic-042","title":"Review preliminary title findings, ownership vesting, liens, easements, restrictions, and exceptions","phase":"closing","micro_checklist_id":"review-preliminary-title-report","semantic_key":"closing.title-review"},
+            {"id":"generic-043","title":"Bind acceptable homeowners insurance before the lender deadline","phase":"closing","micro_checklist_id":"obtain-homeowners-insurance","semantic_key":"closing.home-insurance"},
+            {"id":"generic-044","title":"Review final loan and settlement documents and reconcile cash to close","phase":"closing","micro_checklist_id":"review-closing-disclosure-and-documents","semantic_key":"closing.document-review"},
+            {"id":"generic-045","title":"Perform a documented final walk-through and confirm agreed repairs and included items","phase":"closing","micro_checklist_id":"perform-final-home-walkthrough","semantic_key":"closing.final-walkthrough"},
+            {"id":"generic-046","title":"Confirm recording, funding, keys, access devices, warranties, and possession","phase":"closing","micro_checklist_id":"confirm-home-closing-completion","semantic_key":"closing.completion"}
+          ]
+        },
+        {
+          "id": "after-closing",
+          "title": "After closing",
+          "tasks": [
+            {"id":"generic-050","title":"Store closing, loan, title, inspection, insurance, tax, warranty, and repair records securely","phase":"post-close","micro_checklist_id":"organize-homeownership-records","semantic_key":"postclose.records"},
+            {"id":"generic-051","title":"Transfer utilities, change locks and access codes, test safety devices, and document meter readings","phase":"post-close","micro_checklist_id":"secure-and-activate-new-home","semantic_key":"postclose.activate-home"},
+            {"id":"generic-052","title":"Create a preventive-maintenance calendar and prioritize safety-critical repairs","phase":"post-close","micro_checklist_id":"create-home-maintenance-plan","semantic_key":"postclose.maintenance"},
+            {"id":"generic-053","title":"Update address, insurance inventories, emergency contacts, and applicable registrations","phase":"post-close","micro_checklist_id":"complete-change-of-address","semantic_key":"postclose.address"}
+          ]
+        }
+      ]
+    },
+    {
+      "level": "country",
+      "location": {"country_code":"US","name":"United States"},
+      "sections": [
+        {
+          "id":"us-federal-consumer-protections",
+          "title":"U.S. mortgage and federal protections",
+          "tasks":[
+            {"id":"us-001","title":"Obtain and compare standardized Loan Estimates from multiple lenders","phase":"financing","micro_checklist_id":"compare-loan-estimates","semantic_key":"us.mortgage.loan-estimate"},
+            {"id":"us-002","title":"Review the Closing Disclosure in advance and resolve discrepancies before signing","phase":"closing","micro_checklist_id":"review-closing-disclosure","semantic_key":"us.mortgage.closing-disclosure"},
+            {"id":"us-003","title":"Check eligibility and tradeoffs for conventional, FHA, VA, USDA, and approved assistance programs","phase":"financing","micro_checklist_id":"compare-us-mortgage-programs","semantic_key":"us.mortgage.programs"},
+            {"id":"us-004","title":"Verify fair-housing and equal-credit protections and document suspected discrimination","phase":"search","micro_checklist_id":"verify-fair-housing-protections","semantic_key":"us.fair-housing"},
+            {"id":"us-005","title":"For pre-1978 housing, review the federal lead-based-paint disclosure and available records","phase":"due-diligence","micro_checklist_id":"review-lead-paint-disclosure","semantic_key":"us.lead-disclosure","condition":"property.year_built < 1978"},
+            {"id":"us-006","title":"Check FEMA flood information and lender flood-insurance requirements","phase":"due-diligence","micro_checklist_id":"evaluate-flood-risk-and-insurance","semantic_key":"us.flood-risk"}
+          ]
+        }
+      ],
+      "sources":[
+        {"title":"CFPB — Buying a house","url":"https://www.consumerfinance.gov/owning-a-home/","authority":"Consumer Financial Protection Bureau"},
+        {"title":"CFPB — Shopping for a mortgage","url":"https://www.consumerfinance.gov/consumer-tools/mortgages/shopping-for-a-mortgage/","authority":"Consumer Financial Protection Bureau"},
+        {"title":"CFPB — Closing on your new home","url":"https://www.consumerfinance.gov/owning-a-home/close/","authority":"Consumer Financial Protection Bureau"},
+        {"title":"HUD — Fair Housing","url":"https://www.hud.gov/fairhousing","authority":"U.S. Department of Housing and Urban Development"},
+        {"title":"EPA — Real estate disclosures about lead-based paint","url":"https://www.epa.gov/lead/real-estate-disclosures-about-potential-lead-hazards","authority":"U.S. Environmental Protection Agency"},
+        {"title":"FEMA Flood Map Service Center","url":"https://msc.fema.gov/portal/home","authority":"Federal Emergency Management Agency"}
+      ]
+    },
+    {
+      "level": "state",
+      "location": {"country_code":"US","state_code":"CA","name":"California"},
+      "sections":[
+        {
+          "id":"ca-disclosures-and-transaction",
+          "title":"California disclosures, escrow, title, and tax context",
+          "tasks":[
+            {"id":"ca-001","title":"Review the California agency-relationship disclosure and confirm who each licensee represents","phase":"offer","micro_checklist_id":"review-california-agency-disclosure","semantic_key":"ca.agency-disclosure"},
+            {"id":"ca-002","title":"Review the Transfer Disclosure Statement and investigate disclosed defects or conditions","phase":"due-diligence","micro_checklist_id":"review-california-transfer-disclosure","semantic_key":"ca.transfer-disclosure"},
+            {"id":"ca-003","title":"Review the Natural Hazard Disclosure and independently evaluate applicable fire, flood, earthquake-fault, seismic, and other mapped risks","phase":"due-diligence","micro_checklist_id":"review-california-natural-hazard-disclosure","semantic_key":"ca.natural-hazards"},
+            {"id":"ca-004","title":"Review preliminary title, easements, liens, CC&Rs, and owner-versus-lender title insurance coverage","phase":"closing","micro_checklist_id":"review-california-title-and-escrow","semantic_key":"ca.title-escrow"},
+            {"id":"ca-005","title":"Verify the escrow holder, instructions, fee allocation, and conditions for release of funds and recording","phase":"contract","micro_checklist_id":"verify-california-escrow","semantic_key":"ca.escrow"},
+            {"id":"ca-006","title":"For a new subdivision or common-interest development, review applicable public report and governing documents","phase":"due-diligence","micro_checklist_id":"review-california-public-report","semantic_key":"ca.public-report","condition":"property.is_new_subdivision == true || property.has_hoa == true"},
+            {"id":"ca-007","title":"Estimate base and voter-approved property taxes, special assessments, Mello-Roos or community-facilities-district charges","phase":"planning","micro_checklist_id":"estimate-california-property-taxes-and-assessments","semantic_key":"ca.property-tax-estimate"},
+            {"id":"ca-008","title":"Confirm availability and cost of homeowners, wildfire, earthquake, flood, and other desired insurance before removing insurance-related contingencies","phase":"due-diligence","micro_checklist_id":"evaluate-california-home-insurance","semantic_key":"ca.insurance-availability"},
+            {"id":"ca-009","title":"Verify retrofit, smoke-alarm, carbon-monoxide, water-heater, defensible-space, or point-of-sale requirements applicable to the property","phase":"due-diligence","micro_checklist_id":"verify-california-property-safety-requirements","semantic_key":"ca.safety-compliance"}
+          ]
+        }
+      ],
+      "sources":[
+        {"title":"California DRE — Information for Homebuyers","url":"https://www.dre.ca.gov/consumers/informationforhomebuyers.html","authority":"California Department of Real Estate"},
+        {"title":"California DRE — First Time Home Buyers","url":"https://www.dre.ca.gov/Consumers/FirstHomeCalifornia.html","authority":"California Department of Real Estate"},
+        {"title":"California Civil Code 1103.2 — Natural Hazard Disclosure Statement","url":"https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1103.2.","authority":"California Legislative Information"},
+        {"title":"California Department of Insurance — Title Insurance","url":"https://www.insurance.ca.gov/01-consumers/105-type/95-guides/03-res/Title-Insurance.cfm","authority":"California Department of Insurance"},
+        {"title":"CalHFA Homebuyers","url":"https://www.calhfa.ca.gov/homebuyer/","authority":"California Housing Finance Agency"},
+        {"title":"CAL FIRE Fire Hazard Severity Zones","url":"https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones","authority":"California Department of Forestry and Fire Protection"}
+      ]
+    },
+    {
+      "level": "county",
+      "location": {"country_code":"US","state_code":"CA","county":"Contra Costa","name":"Contra Costa County"},
+      "sections":[
+        {
+          "id":"contra-costa-property-and-tax",
+          "title":"Contra Costa County records and property-tax checks",
+          "tasks":[
+            {"id":"ccc-001","title":"Verify parcel number, current assessment, tax-rate-area details, exemptions, and available property characteristics with the Assessor","phase":"due-diligence","micro_checklist_id":"verify-contra-costa-assessor-record","semantic_key":"ccc.assessor-record"},
+            {"id":"ccc-002","title":"Review the current secured tax bill, direct assessments, delinquency status, and payment schedule","phase":"due-diligence","micro_checklist_id":"review-contra-costa-property-tax-bill","semantic_key":"ccc.tax-bill"},
+            {"id":"ccc-003","title":"Budget separately for one or more supplemental property-tax bills after purchase","phase":"planning","micro_checklist_id":"estimate-contra-costa-supplemental-tax","semantic_key":"ccc.supplemental-tax"},
+            {"id":"ccc-004","title":"Confirm the deed is recorded and ownership and mailing records are updated after closing","phase":"post-close","micro_checklist_id":"confirm-contra-costa-recording","semantic_key":"ccc.recording"},
+            {"id":"ccc-005","title":"Apply for the homeowner’s exemption when eligible and track filing deadlines shown by the Assessor","phase":"post-close","micro_checklist_id":"apply-contra-costa-homeowners-exemption","semantic_key":"ccc.homeowners-exemption"},
+            {"id":"ccc-006","title":"Do not assume a mortgage impound account will pay supplemental tax bills; verify each bill directly","phase":"post-close","micro_checklist_id":"manage-contra-costa-supplemental-tax-bill","semantic_key":"ccc.supplemental-bill-payment"},
+            {"id":"ccc-007","title":"Check county hazard, environmental-health, sewer, septic, well, and permit records when relevant to the parcel","phase":"due-diligence","micro_checklist_id":"review-contra-costa-parcel-agency-records","semantic_key":"ccc.parcel-records"}
+          ]
+        }
+      ],
+      "sources":[
+        {"title":"Contra Costa County — New Property Owners","url":"https://www.contracosta.ca.gov/568/New-Property-Owners","authority":"Contra Costa County Treasurer-Tax Collector"},
+        {"title":"Contra Costa County — Reassessment","url":"https://www.contracosta.ca.gov/583/Reassessment","authority":"Contra Costa County"},
+        {"title":"Contra Costa County — Tax FAQs","url":"https://www.contracosta.ca.gov/7595/Tax-FAQs","authority":"Contra Costa County Treasurer-Tax Collector"},
+        {"title":"Contra Costa County Assessor","url":"https://www.contracosta.ca.gov/191/Assessor","authority":"Contra Costa County Assessor"},
+        {"title":"Contra Costa County Clerk-Recorder","url":"https://www.contracostavote.gov/countyclerk/","authority":"Contra Costa County Clerk-Recorder"}
+      ]
+    },
+    {
+      "level": "city",
+      "location": {"country_code":"US","state_code":"CA","county":"Contra Costa","city":"San Ramon","name":"San Ramon"},
+      "sections":[
+        {
+          "id":"san-ramon-local-due-diligence",
+          "title":"San Ramon local due diligence",
+          "tasks":[
+            {"id":"sr-001","title":"Confirm the property is inside San Ramon city limits and identify its zoning or applicable specific plan","phase":"due-diligence","micro_checklist_id":"verify-san-ramon-zoning","semantic_key":"sr.zoning"},
+            {"id":"sr-002","title":"Review permit history and investigate additions, conversions, solar, pools, electrical, plumbing, HVAC, retaining walls, and other work for permit and final status","phase":"due-diligence","micro_checklist_id":"review-san-ramon-permit-history","semantic_key":"sr.permit-history"},
+            {"id":"sr-003","title":"For Dougherty Valley property, verify the development-specific zoning standards, design guidelines, HOA rules, and applicable service providers","phase":"due-diligence","micro_checklist_id":"review-dougherty-valley-requirements","semantic_key":"sr.dougherty-valley","condition":"property.area == 'Dougherty Valley'"},
+            {"id":"sr-004","title":"Identify the correct water and sewer providers for the exact address; San Ramon addresses may be served by different districts","phase":"due-diligence","micro_checklist_id":"identify-san-ramon-utility-providers","semantic_key":"sr.utility-provider"},
+            {"id":"sr-005","title":"Verify garbage, electricity, gas, internet, and other move-in service arrangements","phase":"post-close","micro_checklist_id":"activate-san-ramon-utilities","semantic_key":"sr.utilities"},
+            {"id":"sr-006","title":"Check mapped wildfire exposure, evacuation access, vegetation responsibilities, and insurance implications for the specific parcel","phase":"due-diligence","micro_checklist_id":"evaluate-san-ramon-wildfire-readiness","semantic_key":"sr.wildfire"},
+            {"id":"sr-007","title":"Evaluate commute routes, traffic patterns, noise sources, nearby development proposals, and planned land-use changes","phase":"search","micro_checklist_id":"evaluate-san-ramon-location-context","semantic_key":"sr.location-context"},
+            {"id":"sr-008","title":"Verify school assignments and enrollment directly with the school district rather than relying on listing descriptions","phase":"search","micro_checklist_id":"verify-school-assignment","semantic_key":"sr.school-assignment","condition":"buyer.needs_schools == true"},
+            {"id":"sr-009","title":"Check whether planned improvements require city approval and validate feasibility before treating them as usable space or future value","phase":"due-diligence","micro_checklist_id":"verify-san-ramon-improvement-feasibility","semantic_key":"sr.future-improvements"}
+          ]
+        }
+      ],
+      "sources":[
+        {"title":"City of San Ramon — Zoning Map","url":"https://www.sanramon.ca.gov/our_city/departments_and_divisions/community_development/planning_services/zoning_map","authority":"City of San Ramon"},
+        {"title":"City of San Ramon — Permit Center FAQs","url":"https://www.sanramon.ca.gov/our_city/permit_center/frequently_asked_questions","authority":"City of San Ramon"},
+        {"title":"City of San Ramon — New Resident Info","url":"https://www.sanramon.ca.gov/residents/new_resident_info","authority":"City of San Ramon"},
+        {"title":"San Ramon Valley Unified School District — Enrollment","url":"https://www.srvusd.net/Students-and-Families/Enrollment/index.html","authority":"San Ramon Valley Unified School District"},
+        {"title":"San Ramon Valley Fire Protection District","url":"https://www.firedepartment.org/","authority":"San Ramon Valley Fire Protection District"}
+      ]
+    }
+  ],
+  "api_examples": [
+    "/api/v1/checklists/buy-home",
+    "/api/v1/checklists/buy-home?country=US",
+    "/api/v1/checklists/buy-home?country=US&state=CA",
+    "/api/v1/checklists/buy-home?country=US&state=CA&county=Contra%20Costa",
+    "/api/v1/checklists/buy-home?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&expand=micro"
+  ]
+}

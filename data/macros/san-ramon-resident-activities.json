@@ -1,0 +1,109 @@
+{
+  "version":"0.1.0",
+  "status":"draft",
+  "risk_level":"mixed",
+  "composition":{"strategy":"inherit-and-overlay","deduplicate_by":"semantic_key","preserve_source_layer":true,"expand_micro":true},
+  "checklists":[
+    {
+      "id":"move-to-san-ramon","title":"Move to San Ramon","layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"plan","semantic_key":"build-move-plan","title":"Build a dated move plan, budget and responsibility list","micro_checklist_id":"build-household-move-plan"},
+          {"sequence":20,"phase":"prepare","semantic_key":"inventory-records","title":"Inventory accounts, records, valuables and services affected by the move","micro_checklist_id":"inventory-move-accounts"},
+          {"sequence":30,"phase":"execute","semantic_key":"confirm-new-home-ready","title":"Confirm access, condition, safety and service readiness before arrival","micro_checklist_id":"confirm-home-move-in-readiness"}
+        ]},
+        {"level":"country","location":{"country":"US"},"tasks":[
+          {"sequence":110,"phase":"update","semantic_key":"usps-change-address","title":"Submit and verify postal change of address","micro_checklist_id":"change-postal-address"}
+        ],"sources":[{"title":"Moving guide","authority":"USA.gov","url":"https://www.usa.gov/moving"}]},
+        {"level":"state","location":{"country":"US","state":"CA"},"tasks":[
+          {"sequence":210,"phase":"update","semantic_key":"ca-dmv-residency","title":"Complete applicable California driver license, vehicle registration and address actions","micro_checklist_id":"complete-ca-dmv-move-actions"},
+          {"sequence":220,"phase":"update","semantic_key":"ca-voter-address","title":"Register or update voter information when eligible","micro_checklist_id":"update-voter-registration"}
+        ],"sources":[{"title":"New to California","authority":"California DMV","url":"https://www.dmv.ca.gov/portal/driver-education-and-safety/special-interest-driver-guides/new-to-california/"}]},
+        {"level":"county","location":{"country":"US","state":"CA","county":"Contra Costa"},"tasks":[
+          {"sequence":310,"phase":"services","semantic_key":"county-services","title":"Identify county health, elections, animal, tax and public-benefit services that apply","micro_checklist_id":"identify-county-resident-services"}
+        ]},
+        {"level":"city","location":{"country":"US","state":"CA","county":"Contra Costa","city":"San Ramon"},"tasks":[
+          {"sequence":410,"phase":"services","semantic_key":"san-ramon-utilities","title":"Identify and activate the correct electricity, gas, water, wastewater, garbage and communications providers","micro_checklist_id":"activate-san-ramon-home-services"},
+          {"sequence":420,"phase":"safety","semantic_key":"san-ramon-alerts","title":"Enroll in local emergency alerts and save emergency information channels","micro_checklist_id":"enroll-san-ramon-emergency-alerts"},
+          {"sequence":430,"phase":"community","semantic_key":"san-ramon-resident-accounts","title":"Create needed city recreation and service-request accounts","micro_checklist_id":"create-san-ramon-resident-accounts"}
+        ],"sources":[
+          {"title":"New Resident Information","authority":"City of San Ramon","url":"https://sanramon.ca.gov/residents/new_resident_info"},
+          {"title":"Emergency Alerts","authority":"City of San Ramon","url":"https://www.sanramon.ca.gov/our_city/departments_and_divisions/police/emergency_preparedness/emergency_alerts"}
+        ]}
+      ]
+    },
+    {
+      "id":"prepare-san-ramon-household-emergency","title":"Prepare a San Ramon household for emergencies","layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"assess","semantic_key":"household-emergency-needs","title":"Identify household hazards, medical, mobility, child, elder and pet needs","micro_checklist_id":"assess-household-emergency-needs"},
+          {"sequence":20,"phase":"plan","semantic_key":"family-emergency-plan","title":"Create communication, meeting, evacuation and shelter plans","micro_checklist_id":"create-family-emergency-plan"},
+          {"sequence":30,"phase":"supplies","semantic_key":"emergency-supplies","title":"Build stay-at-home and portable emergency supply kits","micro_checklist_id":"build-emergency-supply-kits"},
+          {"sequence":40,"phase":"practice","semantic_key":"emergency-drill","title":"Practice, review and periodically update the plan","micro_checklist_id":"run-household-emergency-drill"}
+        ]},
+        {"level":"state","location":{"country":"US","state":"CA"},"tasks":[
+          {"sequence":210,"phase":"supplies","semantic_key":"ca-three-day-kit","title":"Maintain at least three days of water, food and essential supplies, with longer coverage where practical","micro_checklist_id":"build-emergency-supply-kits"}
+        ],"sources":[{"title":"Prepare an Emergency Supply Kit","authority":"California Department of Public Health","url":"https://www.cdph.ca.gov/Programs/EPO/Pages/PrepareanEmergencySupplyKit.aspx"}]},
+        {"level":"city","location":{"country":"US","state":"CA","county":"Contra Costa","city":"San Ramon"},"tasks":[
+          {"sequence":410,"phase":"hazards","semantic_key":"san-ramon-local-hazards","title":"Plan for earthquake, wildfire, creek flooding and transportation-related hazardous-material incidents","micro_checklist_id":"review-san-ramon-local-hazards"},
+          {"sequence":420,"phase":"alerts","semantic_key":"san-ramon-alerts","title":"Enroll every capable household member in local alert channels","micro_checklist_id":"enroll-san-ramon-emergency-alerts"},
+          {"sequence":430,"phase":"supplies","semantic_key":"san-ramon-seven-day-goal","title":"Use 72 hours as a minimum and work toward a week of household supplies","micro_checklist_id":"build-emergency-supply-kits"}
+        ],"sources":[
+          {"title":"Emergency Preparedness","authority":"City of San Ramon","url":"https://www.sanramon.ca.gov/our_city/departments_and_divisions/police/emergency_preparedness"},
+          {"title":"City Preparedness","authority":"City of San Ramon","url":"https://www.sanramon.ca.gov/our_city/departments_and_divisions/police/emergency_preparedness/city_preparedness"}
+        ]}
+      ]
+    },
+    {
+      "id":"complete-san-ramon-home-project","title":"Complete a permitted home project in San Ramon","layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"scope","semantic_key":"define-project-scope","title":"Define scope, budget, drawings, site constraints and desired outcome","micro_checklist_id":"define-home-project-scope"},
+          {"sequence":20,"phase":"verify","semantic_key":"verify-contractor","title":"Verify contractor license, insurance, references and written proposal","micro_checklist_id":"verify-home-contractor"},
+          {"sequence":30,"phase":"closeout","semantic_key":"project-closeout","title":"Collect approvals, warranties, lien releases, final invoices and completion evidence","micro_checklist_id":"close-out-home-project"}
+        ]},
+        {"level":"state","location":{"country":"US","state":"CA"},"tasks":[
+          {"sequence":210,"phase":"contract","semantic_key":"ca-home-improvement-contract","title":"Use applicable California home-improvement contract and payment protections","micro_checklist_id":"review-ca-home-improvement-contract"}
+        ]},
+        {"level":"city","location":{"country":"US","state":"CA","county":"Contra Costa","city":"San Ramon"},"tasks":[
+          {"sequence":410,"phase":"permit","semantic_key":"select-san-ramon-permit","title":"Confirm the required building, planning, engineering or other permit type before applying","micro_checklist_id":"select-san-ramon-permit-type"},
+          {"sequence":420,"phase":"submit","semantic_key":"submit-san-ramon-permit","title":"Create the permit account, submit complete documents and retain the application record","micro_checklist_id":"submit-san-ramon-permit"},
+          {"sequence":430,"phase":"inspect","semantic_key":"schedule-san-ramon-inspections","title":"Schedule required inspections, correct deficiencies and obtain final approval","micro_checklist_id":"manage-san-ramon-permit-inspections"}
+        ],"sources":[
+          {"title":"Permit Center","authority":"City of San Ramon","url":"https://www.sanramon.ca.gov/our_city/permit_center"},
+          {"title":"Building and Safety","authority":"City of San Ramon","url":"https://www.sanramon.ca.gov/our_city/departments_and_divisions/community_development/building_and_safety_services"}
+        ]}
+      ]
+    },
+    {
+      "id":"report-san-ramon-service-issue","title":"Report a San Ramon service or safety issue","layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"triage","semantic_key":"classify-issue-urgency","title":"Determine whether the issue is an emergency, urgent non-emergency or routine request","micro_checklist_id":"triage-public-service-issue"},
+          {"sequence":20,"phase":"document","semantic_key":"document-service-issue","title":"Record location, time, description and safe supporting evidence","micro_checklist_id":"document-public-service-issue"},
+          {"sequence":30,"phase":"follow-up","semantic_key":"track-service-request","title":"Retain the tracking number and follow up or escalate when necessary","micro_checklist_id":"track-public-service-request"}
+        ]},
+        {"level":"city","location":{"country":"US","state":"CA","county":"Contra Costa","city":"San Ramon"},"tasks":[
+          {"sequence":410,"phase":"route","semantic_key":"san-ramon-emergency-route","title":"Call 911 for emergencies and use Police Dispatch for urgent non-emergencies that cannot wait","micro_checklist_id":"route-san-ramon-urgent-issue"},
+          {"sequence":420,"phase":"submit","semantic_key":"san-ramon-crm","title":"Submit routine city issues through Citizen Request Management and save the tracking number","micro_checklist_id":"submit-san-ramon-crm-request"}
+        ],"sources":[
+          {"title":"Citizen Request Management","authority":"City of San Ramon","url":"https://sanramon.ca.gov/our_city/departments_and_divisions/information_technology/citizen_request_management_crm"},
+          {"title":"Police Services","authority":"City of San Ramon","url":"https://www.sanramon.ca.gov/our_city/departments_and_divisions/police/services"}
+        ]}
+      ]
+    },
+    {
+      "id":"register-san-ramon-recreation-program","title":"Register for a San Ramon recreation program","layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"choose","semantic_key":"choose-program","title":"Confirm participant goals, age, schedule, prerequisites, accessibility and total cost","micro_checklist_id":"select-recreation-program"},
+          {"sequence":20,"phase":"register","semantic_key":"complete-registration","title":"Create or update the household account and complete registration","micro_checklist_id":"complete-recreation-registration"},
+          {"sequence":30,"phase":"prepare","semantic_key":"prepare-for-program","title":"Save the receipt and prepare required forms, equipment and arrival details","micro_checklist_id":"prepare-for-recreation-program"}
+        ]},
+        {"level":"city","location":{"country":"US","state":"CA","county":"Contra Costa","city":"San Ramon"},"tasks":[
+          {"sequence":410,"phase":"timing","semantic_key":"san-ramon-registration-date","title":"Check the current guide for resident and non-resident opening dates","micro_checklist_id":"check-san-ramon-recreation-window"},
+          {"sequence":420,"phase":"eligibility","semantic_key":"san-ramon-residency-rate","title":"Verify residency status, participant household relationships and applicable rate","micro_checklist_id":"verify-san-ramon-recreation-eligibility"},
+          {"sequence":430,"phase":"policy","semantic_key":"san-ramon-refund-inclusion","title":"Review convenience fees, refund or transfer rules and inclusion services before paying","micro_checklist_id":"review-san-ramon-recreation-policies"}
+        ],"sources":[
+          {"title":"Recreation Guide","authority":"City of San Ramon","url":"https://www.sanramon.ca.gov/our_city/departments_and_divisions/parks_community_services/recreation_guide"},
+          {"title":"Registration Information","authority":"City of San Ramon","url":"https://www.sanramon.ca.gov/our_city/departments_and_divisions/parks_community_services/department_information/registration_information"}
+        ]}
+      ]
+    }
+  ]
+}

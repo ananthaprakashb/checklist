@@ -8,20 +8,45 @@ The project starts at the **micro-task level**. Each micro checklist captures on
 
 Checklist API should make it easy to:
 
-- Discover a trusted checklist for a common activity.
+- Discover activities that benefit from a checklist.
+- Find a trusted checklist for a common activity.
 - Reuse the same micro checklist across many larger workflows.
 - Compose micro checklists into an ordered macro checklist.
+- Apply country, state, county, city and other authority overlays.
+- Preserve authoritative sources and freshness metadata.
 - Curate and improve checklist quality through public review.
-- Expose stable, versioned checklist data through a simple API.
-- Add contextual variants without duplicating entire checklists.
+
+## San Ramon activity discovery slice
+
+The first broader local catalog researches activities that commonly require multiple steps, records, deadlines, agencies or safety decisions in San Ramon.
+
+Initial seeded checklists:
+
+- Move to San Ramon.
+- Prepare a San Ramon household for emergencies.
+- Complete a permitted home project.
+- Report a city service or safety issue.
+- Register for a recreation class, camp or program.
+
+Priority research also identified wildfire preparation, earthquake preparation, starting a business, school enrollment, contractor hiring, vacation-home preparation, pet services, civic participation, neighborhood events and library use.
+
+```http
+GET /api/v1/activities?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&priority=P0
+GET /api/v1/checklists?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon
+GET /api/v1/checklists/move-to-san-ramon?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&expand=micro
+```
+
+Files:
+
+- [`data/catalogs/san-ramon-activity-priorities.json`](data/catalogs/san-ramon-activity-priorities.json) — researched and prioritized activity opportunities.
+- [`data/macros/san-ramon-resident-activities.json`](data/macros/san-ramon-resident-activities.json) — five initial layered macro checklists.
+- [`data/micro/san-ramon-resident-activities.json`](data/micro/san-ramon-resident-activities.json) — reusable resident sub-checklists.
+- [`openapi/san-ramon-activities.yaml`](openapi/san-ramon-activities.yaml) — activity discovery and checklist composition contract.
+- [`docs/SAN_RAMON_ACTIVITY_RESEARCH.md`](docs/SAN_RAMON_ACTIVITY_RESEARCH.md) — research method, priorities, sources and roadmap.
 
 ## Location-aware housing vertical slices
 
 ### Buying a home in San Ramon
-
-```text
-generic → United States → California → Contra Costa County → San Ramon
-```
 
 ```http
 GET /api/v1/checklists/buy-home?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&expand=micro
@@ -35,58 +60,28 @@ Files:
 
 ### Renting a home in Manteca
 
-```text
-generic → United States → California → San Joaquin County → Manteca
-```
-
 ```http
 GET /api/v1/checklists/rent-home?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
 ```
 
-The rental slice covers planning, budgeting, application preparation, scam prevention, unit inspection, screening, lease review, deposits, disclosures, habitability, utilities, move-in evidence, repair requests, fair-housing assistance and move-out.
-
 Files:
 
-- [`data/macros/rent-home.json`](data/macros/rent-home.json) — layered generic, U.S., California, San Joaquin County and Manteca tasks.
-- [`data/micro/home-renting.json`](data/micro/home-renting.json) — reusable rental sub-checklists.
-- [`openapi/home-renting.yaml`](openapi/home-renting.yaml) — draft rental API contract.
-- [`docs/RENT_HOME_MANTECA.md`](docs/RENT_HOME_MANTECA.md) — scope, research basis and local decisions.
+- [`data/macros/rent-home.json`](data/macros/rent-home.json)
+- [`data/micro/home-renting.json`](data/micro/home-renting.json)
+- [`openapi/home-renting.yaml`](openapi/home-renting.yaml)
+- [`docs/RENT_HOME_MANTECA.md`](docs/RENT_HOME_MANTECA.md)
 
 ### Leasing a property as a landlord in Manteca
-
-```text
-generic → United States → California → San Joaquin County → Manteca
-```
 
 ```http
 GET /api/v1/checklists/lease-property-landlord?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
 ```
 
-The landlord slice covers property readiness, pricing, compliant advertising, written screening criteria, consumer reports, applicant decisions, leases, disclosures, move-in funds, condition evidence, habitability, lawful entry, rent and termination controls, code compliance, utilities, notices and deposit accounting.
-
 Files:
 
-- [`data/macros/lease-property-landlord.json`](data/macros/lease-property-landlord.json) — layered landlord workflow and authoritative references.
-- [`data/micro/property-leasing-landlord.json`](data/micro/property-leasing-landlord.json) — reusable landlord sub-checklists.
-- [`openapi/property-leasing-landlord.yaml`](openapi/property-leasing-landlord.yaml) — draft landlord API contract.
-
-The composed response should merge only the matching overlays, deduplicate by stable semantic key, preserve originating jurisdiction and authoritative sources, apply conditions, and optionally expand micro-checklist steps.
-
-All housing content is marked `draft` and `high` risk. It is educational, must retain citations, and requires periodic review because laws, forms, fees, programs and local procedures change.
-
-## Initial micro-checklist areas
-
-| Area | Example micro activities |
-|---|---|
-| Daily and personal | Charge devices, pack identification, check weather, prepare medications, secure the home |
-| Travel and transportation | Verify reservations, check routes, prepare a vehicle, prepare for transit, pack a day bag |
-| Technical | Restart safely, capture an error, prepare a deployment, create a secure account, back up a file |
-| Administrative | Prepare for an appointment, submit an online form, pay a bill |
-| Shopping and household | Prepare a shopping list, receive a package, leave a room clean |
-| Events and work | Prepare for a meeting, host a small gathering |
-| Housing | Compare loans, inspect homes and rentals, review leases and disclosures, screen applicants, manage deposits, document condition, activate utilities, request repairs and complete closing or move-out |
-
-The proposed checklist steps and content-quality rules are documented in the [High-Level Design](docs/HIGH_LEVEL_DESIGN.md).
+- [`data/macros/lease-property-landlord.json`](data/macros/lease-property-landlord.json)
+- [`data/micro/property-leasing-landlord.json`](data/micro/property-leasing-landlord.json)
+- [`openapi/property-leasing-landlord.yaml`](openapi/property-leasing-landlord.yaml)
 
 ## Proposed public API
 
@@ -100,6 +95,7 @@ Planned endpoints:
 
 ```http
 GET  /api/v1/health
+GET  /api/v1/activities
 GET  /api/v1/checklists
 GET  /api/v1/checklists/{id}
 GET  /api/v1/checklists/{id}/layers
@@ -109,22 +105,17 @@ GET  /api/v1/tags
 POST /api/v1/checklists/compose
 ```
 
-Example queries:
-
-```http
-GET /api/v1/checklists?type=micro&category=housing
-GET /api/v1/checklists/buy-home?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon
-GET /api/v1/checklists/rent-home?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
-GET /api/v1/checklists/lease-property-landlord?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
-```
-
-The first implementation should prioritize read-only catalog endpoints. Composition can initially be deterministic and non-persistent.
+The first implementation should prioritize read-only activity discovery, catalog and composed-checklist endpoints. Composition can initially be deterministic and non-persistent.
 
 ## Core data concepts
 
+### Activity opportunity
+
+A researched activity that is scored by frequency, consequences, agency count, document burden, deadline sensitivity and reuse potential. It may be `seeded`, `researched` or in the `backlog`.
+
 ### Micro checklist
 
-The smallest independently useful activity. It has a stable ID, category, tags, estimated time, version, status, and ordered steps.
+The smallest independently useful activity. It has a stable ID, category, tags, estimated time, version, status and ordered steps.
 
 ### Macro checklist
 
@@ -132,11 +123,21 @@ A larger workflow made by referencing ordered micro-checklist IDs, with optional
 
 ### Jurisdiction layer
 
-A country, state, county, city, or other authority-specific overlay. It contains only the tasks that supplement or refine its parent layers. A composed response records `source_layer` and `source_location` for traceability.
+A country, state, county, city, district or other authority-specific overlay. It contains only tasks that supplement or refine its parent layers. A composed response records `source_layer` and `source_location` for traceability.
 
 ### Composition
 
-A deterministic process that resolves dependencies, applies conditions, merges jurisdiction overlays, removes duplicates, orders actions, and preserves source checklist IDs.
+A deterministic process that resolves dependencies, applies conditions, merges jurisdiction overlays, removes duplicates, orders actions and preserves source checklist IDs.
+
+## Content decomposition rule
+
+Create or reference a micro checklist when a task:
+
+- Has multiple ordered actions.
+- Can cause meaningful safety, legal, financial or deadline consequences.
+- Requires evidence, comparison, verification or escalation.
+- Has conditional branches or a professional handoff.
+- Is reusable in another activity.
 
 ## Architecture direction
 
@@ -145,6 +146,8 @@ API Consumer
     |
     v
 HTTP API and Validation
+    |
+    +--> Activity Discovery Service
     |
     +--> Checklist Query Service --> Curated Checklist Repository
     |
@@ -156,4 +159,6 @@ HTTP API and Validation
             +--> Ordering Rules
 ```
 
-For the first release, version-controlled JSON or YAML files should be the source of truth.
+For the first release, version-controlled JSON or YAML files should be the source of truth. This keeps checklist contributions public, reviewable, testable and deployable without requiring a database.
+
+All legal, safety, financial and government-process content is marked `draft` or risk-scoped, must retain authoritative references and requires periodic review because laws, forms, fees, programs and local procedures change.

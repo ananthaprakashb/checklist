@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  title: San Ramon Activity Checklist API
+  version: 0.1.0
+  description: Draft discovery and composition contract for resident activities, using generic, country, state, county and city overlays.
+servers:
+  - url: /api/v1
+paths:
+  /activities:
+    get:
+      summary: Discover activities that benefit from a checklist
+      parameters:
+        - $ref: '#/components/parameters/Country'
+        - $ref: '#/components/parameters/State'
+        - $ref: '#/components/parameters/County'
+        - $ref: '#/components/parameters/City'
+        - name: category
+          in: query
+          schema: {type: string}
+        - name: priority
+          in: query
+          schema: {type: string, enum: [P0, P1, P2, P3]}
+        - name: build_status
+          in: query
+          schema: {type: string, enum: [seeded, researched, backlog]}
+      responses:
+        '200':
+          description: Matching activity opportunities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: {$ref: '#/components/schemas/Activity'}
+  /checklists:
+    get:
+      summary: List available macro checklists
+      parameters:
+        - $ref: '#/components/parameters/Country'
+        - $ref: '#/components/parameters/State'
+        - $ref: '#/components/parameters/County'
+        - $ref: '#/components/parameters/City'
+        - name: category
+          in: query
+          schema: {type: string}
+      responses:
+        '200':
+          description: Checklist summaries
+  /checklists/{id}:
+    get:
+      summary: Return a composed location-aware checklist
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+        - $ref: '#/components/parameters/Country'
+        - $ref: '#/components/parameters/State'
+        - $ref: '#/components/parameters/County'
+        - $ref: '#/components/parameters/City'
+        - name: expand
+          in: query
+          schema: {type: string, enum: [none, micro], default: none}
+      responses:
+        '200':
+          description: Composed checklist with source-layer traceability
+        '404':
+          description: Checklist or location overlay not found
+  /micro-checklists/{id}:
+    get:
+      summary: Return one reusable sub-checklist
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Micro checklist}
+        '404': {description: Micro checklist not found}
+components:
+  parameters:
+    Country:
+      name: country
+      in: query
+      schema: {type: string, example: US}
+    State:
+      name: state
+      in: query
+      schema: {type: string, example: CA}
+    County:
+      name: county
+      in: query
+      schema: {type: string, example: Contra Costa}
+    City:
+      name: city
+      in: query
+      schema: {type: string, example: San Ramon}
+  schemas:
+    Activity:
+      type: object
+      required: [id, priority, category, reason, build_status]
+      properties:
+        id: {type: string}
+        priority: {type: string}
+        category: {type: string}
+        reason: {type: string}
+        build_status: {type: string}

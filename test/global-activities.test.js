@@ -23,12 +23,12 @@ async function withServer(run) {
   }
 }
 
-test('global activity catalog exposes exactly 50 location-independent activities', async () => {
+test('global activity catalog exposes 62 location-independent activities', async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(`${baseUrl}/api/v1/global-activities`);
     assert.equal(response.status, 200);
     const body = await response.json();
-    assert.equal(body.count, 50);
+    assert.equal(body.count, 62);
     assert.equal(body.items.every((item) => item.scope === 'global' && item.location_specific === false), true);
     assert.equal(body.items.every((item) => item.task_count === 5), true);
   });
@@ -55,10 +55,37 @@ test('global activity detail, task, and subtask endpoints return nested data', a
   });
 });
 
-test('global activity endpoints support category filtering and 404s', async () => {
+test('common task patterns expose actionable subtasks', async () => {
+  await withServer(async (baseUrl) => {
+    const expected = [
+      ['daily-task-planning', 'prioritize', /important/i],
+      ['grocery-shopping-list', 'build-list', /categor/i],
+      ['meeting-agenda-follow-up', 'follow-up', /owner/i],
+      ['employee-onboarding', 'prepare', /account/i],
+      ['bug-report-triage', 'reproduce', /steps/i],
+      ['assignment-tracker', 'submit', /submission/i]
+    ];
+
+    for (const [activityId, taskId, pattern] of expected) {
+      const response = await fetch(`${baseUrl}/api/v1/global-activities/${activityId}/tasks/${taskId}/subtasks`);
+      assert.equal(response.status, 200);
+      const body = await response.json();
+      assert.equal(body.items.length, 2);
+      assert.equal(body.items.some((item) => pattern.test(item.title)), true);
+    }
+  });
+});
+
+test('global activity endpoints support category filtering, search, and 404s', async () => {
   await withServer(async (baseUrl) => {
     const filtered = await fetch(`${baseUrl}/api/v1/global-activities?category=career`);
     assert.equal((await filtered.json()).count, 5);
+
+    const marketing = await fetch(`${baseUrl}/api/v1/global-activities?category=marketing`);
+    assert.equal((await marketing.json()).count, 2);
+
+    const searched = await fetch(`${baseUrl}/api/v1/global-activities?q=onboarding`);
+    assert.equal((await searched.json()).count, 2);
 
     const missing = await fetch(`${baseUrl}/api/v1/global-activities/not-real`);
     assert.equal(missing.status, 404);

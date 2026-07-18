@@ -4,6 +4,45 @@ A public, curated API of reusable checklists for everyday, technical, personal, 
 
 The project starts at the **micro-task level**. Each micro checklist captures one small activity. Larger **macro checklists** are assembled by composing these reusable building blocks.
 
+## Run the HTTP server
+
+Requirements: Node.js 20 or newer. The first implementation has no runtime dependencies.
+
+```bash
+npm start
+```
+
+The default address is `http://localhost:3000`. Override it with `HOST` and `PORT`.
+
+```bash
+HOST=127.0.0.1 PORT=8080 npm start
+npm test
+npm run check
+```
+
+Example requests:
+
+```bash
+curl http://localhost:3000/api/v1/health
+curl 'http://localhost:3000/api/v1/activities?city=San%20Ramon&priority=P0'
+curl 'http://localhost:3000/api/v1/checklists/move-to-san-ramon?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon&expand=micro'
+```
+
+Composition with structured context:
+
+```bash
+curl -X POST http://localhost:3000/api/v1/checklists/compose \
+  -H 'content-type: application/json' \
+  -d '{
+    "checklist_id": "buy-home",
+    "location": {"country":"US","state":"CA","county":"Contra Costa","city":"San Ramon"},
+    "context": {"property":{"year_built":1965}},
+    "expand_micro": true
+  }'
+```
+
+The engine loads version-controlled JSON, selects matching jurisdiction layers, evaluates supported conditions against explicit context, deduplicates by `semantic_key`, lets more-specific overlays replace inherited tasks, preserves source layer and location, orders tasks, combines authoritative sources and optionally expands micro-checklist steps.
+
 ## Project vision
 
 Checklist API should make it easy to:
@@ -83,15 +122,15 @@ Files:
 - [`data/micro/property-leasing-landlord.json`](data/micro/property-leasing-landlord.json)
 - [`openapi/property-leasing-landlord.yaml`](openapi/property-leasing-landlord.yaml)
 
-## Proposed public API
+## Implemented public API
 
-Initial base path:
+Base path:
 
 ```text
 /api/v1
 ```
 
-Planned endpoints:
+Endpoints:
 
 ```http
 GET  /api/v1/health
@@ -105,7 +144,7 @@ GET  /api/v1/tags
 POST /api/v1/checklists/compose
 ```
 
-The first implementation should prioritize read-only activity discovery, catalog and composed-checklist endpoints. Composition can initially be deterministic and non-persistent.
+The service is read-only and non-persistent. Data is loaded at process startup from the repository JSON files.
 
 ## Core data concepts
 
@@ -139,26 +178,25 @@ Create or reference a micro checklist when a task:
 - Has conditional branches or a professional handoff.
 - Is reusable in another activity.
 
-## Architecture direction
+## Runtime architecture
 
 ```text
 API Consumer
     |
     v
-HTTP API and Validation
+Node.js HTTP Server
     |
     +--> Activity Discovery Service
     |
-    +--> Checklist Query Service --> Curated Checklist Repository
+    +--> Checklist Query Service --> Version-controlled JSON repository
     |
     +--> Composition Service
-            +--> Jurisdiction Resolver
-            +--> Dependency Resolver
-            +--> Step Deduplicator
-            +--> Condition Evaluator
+            +--> Jurisdiction Matcher
+            +--> Restricted Condition Evaluator
+            +--> Semantic-key Deduplicator
+            +--> Source Aggregator
+            +--> Micro-checklist Expander
             +--> Ordering Rules
 ```
-
-For the first release, version-controlled JSON or YAML files should be the source of truth. This keeps checklist contributions public, reviewable, testable and deployable without requiring a database.
 
 All legal, safety, financial and government-process content is marked `draft` or risk-scoped, must retain authoritative references and requires periodic review because laws, forms, fees, programs and local procedures change.

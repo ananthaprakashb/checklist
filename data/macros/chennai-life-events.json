@@ -1,0 +1,104 @@
+{
+  "version":"0.1.0",
+  "status":"draft",
+  "risk_level":"mixed",
+  "composition":{"strategy":"inherit-and-overlay","deduplicate_by":"semantic_key","preserve_source_layer":true,"expand_micro":true},
+  "checklists":[
+    {
+      "id":"travel-domestic-from-chennai","title":"Travel within India from Chennai","category":"travel","tags":["chennai","domestic-travel","india","family"],"layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"plan","semantic_key":"define-trip-plan","title":"Confirm purpose, travellers, dates, route, budget and cancellation flexibility","micro_checklist_id":"define-chennai-trip-plan"},
+          {"sequence":20,"phase":"book","semantic_key":"book-domestic-transport","title":"Book transport and lodging using names that match accepted identity documents","micro_checklist_id":"book-domestic-travel-india"},
+          {"sequence":30,"phase":"prepare","semantic_key":"prepare-travel-documents","title":"Prepare identity, tickets, accommodation, medical and emergency records","micro_checklist_id":"prepare-domestic-travel-documents-india"},
+          {"sequence":40,"phase":"pack","semantic_key":"pack-trip","title":"Pack for destination weather, baggage limits, medicines and planned activities","micro_checklist_id":"pack-for-trip-from-chennai"},
+          {"sequence":50,"phase":"departure","semantic_key":"manage-departure","title":"Confirm live status, local transfer and an early departure buffer","micro_checklist_id":"manage-chennai-departure"}
+        ]},
+        {"level":"city","location":{"country":"IN","state":"Tamil Nadu","district":"Chennai","city":"Chennai"},"tasks":[
+          {"sequence":410,"phase":"local-logistics","semantic_key":"chennai-local-transfer","title":"Plan the Chennai airport, railway-station or bus-terminal transfer around traffic and weather","micro_checklist_id":"plan-chennai-terminal-transfer"}
+        ],"sources":[{"title":"Chennai Airport","authority":"Airports Authority of India","url":"https://www.aai.aero/en/airports/chennai"}]}
+      ]
+    },
+    {
+      "id":"travel-international-from-chennai","title":"Travel abroad from Chennai","category":"travel","tags":["chennai","international-travel","passport","customs"],"layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"eligibility","semantic_key":"verify-passport-entry","title":"Verify passport validity, destination entry rules, transit requirements and traveller name consistency","micro_checklist_id":"verify-international-travel-eligibility-india"},
+          {"sequence":20,"phase":"book","semantic_key":"book-international-trip","title":"Book flights, lodging and transfers only after checking entry and cancellation conditions","micro_checklist_id":"book-international-travel-from-india"},
+          {"sequence":30,"phase":"protect","semantic_key":"international-health-money","title":"Arrange insurance, medicines, payment methods, foreign exchange and emergency access","micro_checklist_id":"prepare-international-health-money"},
+          {"sequence":40,"phase":"documents","semantic_key":"international-document-pack","title":"Create secure paper and offline digital copies of essential travel records","micro_checklist_id":"prepare-international-document-pack"},
+          {"sequence":50,"phase":"customs","semantic_key":"india-customs-review","title":"Review Indian customs and declaration requirements before departure and return","micro_checklist_id":"review-india-customs-travel-rules"},
+          {"sequence":60,"phase":"departure","semantic_key":"international-departure","title":"Complete airline checks and reach the international terminal with sufficient buffer","micro_checklist_id":"manage-chennai-international-departure"}
+        ]},
+        {"level":"country","location":{"country":"IN"},"sources":[
+          {"title":"Getting Started — Passport Seva","authority":"Ministry of External Affairs, Government of India","url":"https://www.passportindia.gov.in/psp/GettingStarted"},
+          {"title":"International Travellers","authority":"Central Board of Indirect Taxes and Customs","url":"https://www.cbic.gov.in/entities/internationalTravellers"}
+        ]},
+        {"level":"city","location":{"country":"IN","state":"Tamil Nadu","district":"Chennai","city":"Chennai"},"tasks":[
+          {"sequence":410,"phase":"local-logistics","semantic_key":"chennai-international-terminal","title":"Verify the correct Chennai terminal, airline counter and ground-transfer plan before leaving home","micro_checklist_id":"plan-chennai-terminal-transfer"}
+        ],"sources":[{"title":"Chennai Airport","authority":"Airports Authority of India","url":"https://www.aai.aero/en/airports/chennai"}]}
+      ]
+    },
+    {
+      "id":"organize-birthday-party-chennai","title":"Organize a birthday party in Chennai","category":"event","tags":["chennai","birthday","children","party"],"layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"scope","semantic_key":"birthday-scope","title":"Set the date, budget, guest count, age group, format and decision owners","micro_checklist_id":"define-birthday-party-scope"},
+          {"sequence":20,"phase":"venue","semantic_key":"birthday-venue","title":"Select and contract a suitable venue with capacity, accessibility and weather backup","micro_checklist_id":"select-event-venue-chennai"},
+          {"sequence":30,"phase":"guests","semantic_key":"birthday-guests","title":"Send invitations, track responses and collect dietary or accessibility needs","micro_checklist_id":"manage-event-guests"},
+          {"sequence":40,"phase":"vendors","semantic_key":"birthday-vendors","title":"Confirm food, cake, décor, entertainment, photography and payment milestones","micro_checklist_id":"manage-chennai-event-vendors"},
+          {"sequence":50,"phase":"safety","semantic_key":"birthday-safety","title":"Plan child supervision, food safety, first aid, electrical safety and pickup controls","micro_checklist_id":"prepare-family-event-safety"},
+          {"sequence":60,"phase":"run","semantic_key":"birthday-run-sheet","title":"Create a day-of run sheet, contact list, setup checklist and cleanup handoff","micro_checklist_id":"run-family-event-day"}
+        ]},
+        {"level":"city","location":{"country":"IN","state":"Tamil Nadu","district":"Chennai","city":"Chennai"},"tasks":[
+          {"sequence":410,"phase":"weather","semantic_key":"chennai-weather-backup","title":"Prepare heat, rain and monsoon contingencies for guests, food and transport","micro_checklist_id":"prepare-chennai-event-weather-plan"},
+          {"sequence":420,"phase":"venue","semantic_key":"gcc-community-hall-option","title":"When using a Greater Chennai Corporation community hall, verify slot, capacity, charges, deposit and permitted use","micro_checklist_id":"book-gcc-community-hall"}
+        ],"sources":[{"title":"Community Hall Booking","authority":"Greater Chennai Corporation","url":"https://www.chennaicorporation.gov.in/gcc/online-services/community-hall/booking/"}]}
+      ]
+    },
+    {
+      "id":"organize-wedding-chennai","title":"Organize a wedding in Chennai","category":"event","tags":["chennai","wedding","marriage","registration"],"layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"scope","semantic_key":"wedding-scope","title":"Agree on ceremonies, budget, guest count, dates, responsibilities and payment authority","micro_checklist_id":"define-wedding-scope"},
+          {"sequence":20,"phase":"venue","semantic_key":"wedding-venue","title":"Reserve ceremony and reception venues with written inclusions, timing and cancellation terms","micro_checklist_id":"select-event-venue-chennai"},
+          {"sequence":30,"phase":"guests","semantic_key":"wedding-guests","title":"Build the guest list, invitations, RSVP process, seating, lodging and transport plan","micro_checklist_id":"manage-wedding-guests"},
+          {"sequence":40,"phase":"vendors","semantic_key":"wedding-vendors","title":"Contract catering, décor, photo/video, music, makeup, clothing and transport vendors","micro_checklist_id":"manage-chennai-event-vendors"},
+          {"sequence":50,"phase":"documents","semantic_key":"wedding-registration","title":"Prepare age, identity, address, ceremony and witness records for applicable marriage registration","micro_checklist_id":"prepare-tamil-nadu-marriage-registration"},
+          {"sequence":60,"phase":"run","semantic_key":"wedding-run-sheet","title":"Create ceremony-by-ceremony run sheets, payment envelopes, contacts and contingency owners","micro_checklist_id":"run-chennai-wedding-day"},
+          {"sequence":70,"phase":"closeout","semantic_key":"wedding-closeout","title":"Reconcile vendors, gifts, rentals, photographs, certificates and remaining payments","micro_checklist_id":"close-out-family-event"}
+        ]},
+        {"level":"state","location":{"country":"IN","state":"Tamil Nadu"},"tasks":[
+          {"sequence":310,"phase":"registration","semantic_key":"tn-marriage-appointment","title":"Use the current Tamil Nadu registration process to identify the correct registration route, office, documents and appointment","micro_checklist_id":"prepare-tamil-nadu-marriage-registration"}
+        ],"sources":[{"title":"e-Sevai service list — online appointment for marriage registration","authority":"Tamil Nadu Information Technology Department","url":"https://www.it.tn.gov.in/en/List_of_services_offered_in_e-sevai_centres"}]},
+        {"level":"city","location":{"country":"IN","state":"Tamil Nadu","district":"Chennai","city":"Chennai"},"tasks":[
+          {"sequence":410,"phase":"weather","semantic_key":"chennai-wedding-weather","title":"Protect guest transport, outdoor rituals, food and electrical setup from Chennai heat or rain","micro_checklist_id":"prepare-chennai-event-weather-plan"},
+          {"sequence":420,"phase":"venue","semantic_key":"gcc-community-hall-option","title":"When using a Greater Chennai Corporation community hall, verify current booking rules and all charges","micro_checklist_id":"book-gcc-community-hall"}
+        ],"sources":[{"title":"Community Hall Booking","authority":"Greater Chennai Corporation","url":"https://www.chennaicorporation.gov.in/gcc/online-services/community-hall/booking/"}]}
+      ]
+    },
+    {
+      "id":"organize-housewarming-chennai","title":"Organize a housewarming in Chennai","category":"event","tags":["chennai","housewarming","griha-pravesh","family"],"layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"home-readiness","semantic_key":"housewarming-home-ready","title":"Confirm safe access, utilities, toilets, lighting, cleaning and protected work areas","micro_checklist_id":"prepare-home-for-guests"},
+          {"sequence":20,"phase":"ceremony","semantic_key":"housewarming-ceremony","title":"Confirm ceremony timing, officiant, supplies and household responsibilities","micro_checklist_id":"plan-housewarming-ceremony"},
+          {"sequence":30,"phase":"guests","semantic_key":"housewarming-guests","title":"Invite guests with accurate map, parking, lift, footwear and meal information","micro_checklist_id":"manage-event-guests"},
+          {"sequence":40,"phase":"food","semantic_key":"housewarming-food","title":"Plan food quantities, serving flow, drinking water, allergies and waste handling","micro_checklist_id":"manage-family-event-food"},
+          {"sequence":50,"phase":"run","semantic_key":"housewarming-day","title":"Assign entry, ceremony, food, parking, photography and cleanup roles","micro_checklist_id":"run-family-event-day"}
+        ]},
+        {"level":"city","location":{"country":"IN","state":"Tamil Nadu","district":"Chennai","city":"Chennai"},"tasks":[
+          {"sequence":410,"phase":"neighbours","semantic_key":"chennai-neighbour-parking","title":"Notify affected neighbours or building management and prevent blocked access or unmanaged street parking","micro_checklist_id":"plan-chennai-event-access"},
+          {"sequence":420,"phase":"weather","semantic_key":"chennai-weather-backup","title":"Provide shade, ventilation, drinking water and rain protection appropriate to the season","micro_checklist_id":"prepare-chennai-event-weather-plan"}
+        ]}
+      ]
+    },
+    {
+      "id":"book-gcc-community-hall","title":"Book a Greater Chennai Corporation community hall","category":"venue","tags":["chennai","community-hall","booking","event"],"layers":[
+        {"level":"generic","tasks":[
+          {"sequence":10,"phase":"requirements","semantic_key":"venue-requirements","title":"Confirm event type, date, attendance, accessibility, kitchen, stage, power and time requirements","micro_checklist_id":"define-event-venue-requirements"}
+        ]},
+        {"level":"city","location":{"country":"IN","state":"Tamil Nadu","district":"Chennai","city":"Chennai"},"tasks":[
+          {"sequence":410,"phase":"availability","semantic_key":"gcc-hall-availability","title":"Check the official portal by zone, division, hall, month and morning or evening slot","micro_checklist_id":"book-gcc-community-hall"},
+          {"sequence":420,"phase":"cost","semantic_key":"gcc-hall-cost","title":"Record current rental, surcharge, GST, deposit, electricity, cleaning and PA-system charges before payment","micro_checklist_id":"book-gcc-community-hall"},
+          {"sequence":430,"phase":"rules","semantic_key":"gcc-hall-rules","title":"Verify capacity, full-day slot selection, permitted event use, refund and handover conditions","micro_checklist_id":"book-gcc-community-hall"}
+        ],"sources":[{"title":"Community Hall Booking","authority":"Greater Chennai Corporation","url":"https://www.chennaicorporation.gov.in/gcc/online-services/community-hall/booking/"}]}
+      ]
+    }
+  ]
+}

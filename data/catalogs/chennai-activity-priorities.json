@@ -1,0 +1,18 @@
+{
+  "id":"chennai-activity-priorities",
+  "version":"0.1.0",
+  "status":"draft",
+  "location":{"country":"IN","state":"Tamil Nadu","district":"Chennai","city":"Chennai"},
+  "method":{"criteria":["frequency","consequence_of_missing_step","document_burden","deadline_sensitivity","vendor_coordination","reuse_potential"],"priority_scale":"P0 highest through P3 exploratory","source_policy":"Use official Government of India, Government of Tamil Nadu and Greater Chennai Corporation sources for regulated or government-facing steps."},
+  "activities":[
+    {"id":"travel-domestic-from-chennai","priority":"P0","category":"travel","reason":"Transport, identity, baggage, local transfers, medicines and family coordination commonly require timed preparation.","build_status":"seeded"},
+    {"id":"travel-international-from-chennai","priority":"P0","category":"travel","reason":"Passport, destination entry rules, insurance, foreign exchange, customs and airport timing create high consequences for missed steps.","build_status":"seeded"},
+    {"id":"organize-birthday-party-chennai","priority":"P0","category":"event","reason":"Guest count, venue, food, accessibility, weather, vendors and child-safety tasks require coordinated deadlines.","build_status":"seeded"},
+    {"id":"organize-wedding-chennai","priority":"P0","category":"event","reason":"Venue, ceremony, guests, vendors, payments, legal registration and travel logistics span many months and parties.","build_status":"seeded"},
+    {"id":"organize-housewarming-chennai","priority":"P1","category":"event","reason":"Home readiness, ceremony, food, parking, neighbours and post-event cleanup benefit from an ordered plan.","build_status":"seeded"},
+    {"id":"book-gcc-community-hall","priority":"P1","category":"venue","reason":"Availability, slot selection, charges, deposit, capacity and restricted uses must be checked before payment.","build_status":"seeded"},
+    {"id":"organize-funeral-memorial-chennai","priority":"P0","category":"life-event","reason":"Time-sensitive family communication, records, transport and ceremony arrangements require calm delegation.","build_status":"backlog"},
+    {"id":"organize-school-college-function-chennai","priority":"P1","category":"event","reason":"Venue, permissions, student safety, transport, stage operations and vendor coordination create dependencies.","build_status":"backlog"},
+    {"id":"host-community-cultural-event-chennai","priority":"P1","category":"event","reason":"Public attendance may trigger venue, crowd, food, electrical, sound, traffic and safety requirements.","build_status":"backlog"}
+  ]
+}

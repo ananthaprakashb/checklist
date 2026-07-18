@@ -1,0 +1,179 @@
+openapi: 3.1.0
+info:
+  title: Checklist API — Home Buying Slice
+  version: 0.1.0
+  description: >-
+    Draft read-only contract for returning a generic home-buying checklist with
+    inherited country, state, county, and city overlays. High-risk content is
+    educational and must retain source and jurisdiction metadata.
+servers:
+  - url: https://api.example.com/api/v1
+paths:
+  /checklists/buy-home:
+    get:
+      summary: Get a composed home-buying checklist
+      operationId: getBuyHomeChecklist
+      parameters:
+        - in: query
+          name: country
+          schema:
+            type: string
+            example: US
+        - in: query
+          name: state
+          schema:
+            type: string
+            example: CA
+        - in: query
+          name: county
+          schema:
+            type: string
+            example: Contra Costa
+        - in: query
+          name: city
+          schema:
+            type: string
+            example: San Ramon
+        - in: query
+          name: phase
+          description: Filter to one or more lifecycle phases.
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [planning, financing, search, offer, contract, due-diligence, closing, post-close]
+          style: form
+          explode: false
+        - in: query
+          name: expand
+          schema:
+            type: string
+            enum: [none, micro]
+            default: none
+        - in: query
+          name: includeSources
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Composed checklist from generic through the most specific recognized location.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComposedChecklist'
+        '400':
+          description: Invalid or inconsistent location hierarchy.
+        '404':
+          description: Checklist or requested jurisdiction overlay not found.
+  /checklists/buy-home/layers:
+    get:
+      summary: List available home-buying jurisdiction layers
+      operationId: listBuyHomeLayers
+      responses:
+        '200':
+          description: Available layers.
+  /micro-checklists/{microChecklistId}:
+    get:
+      summary: Get one reusable micro checklist
+      operationId: getMicroChecklist
+      parameters:
+        - in: path
+          name: microChecklistId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Micro checklist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicroChecklist'
+        '404':
+          description: Micro checklist not found.
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        country_code: {type: string}
+        state_code: {type: string}
+        county: {type: string}
+        city: {type: string}
+        name: {type: string}
+    Source:
+      type: object
+      required: [title, url, authority]
+      properties:
+        title: {type: string}
+        url: {type: string, format: uri}
+        authority: {type: string}
+        reviewed_at: {type: string, format: date}
+    Task:
+      type: object
+      required: [id, title, phase, semantic_key]
+      properties:
+        id: {type: string}
+        title: {type: string}
+        phase: {type: string}
+        micro_checklist_id: {type: string}
+        semantic_key: {type: string}
+        condition: {type: string}
+        source_layer:
+          type: string
+          enum: [generic, country, state, county, city]
+        source_location:
+          $ref: '#/components/schemas/Location'
+        micro_checklist:
+          $ref: '#/components/schemas/MicroChecklist'
+    Section:
+      type: object
+      required: [id, title, tasks]
+      properties:
+        id: {type: string}
+        title: {type: string}
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+    MicroChecklist:
+      type: object
+      required: [id, title, steps]
+      properties:
+        id: {type: string}
+        title: {type: string}
+        estimated_minutes: {type: integer, minimum: 0}
+        steps:
+          type: array
+          items: {type: string}
+        sources:
+          type: array
+          items: {type: string, format: uri}
+    ComposedChecklist:
+      type: object
+      required: [id, title, version, applied_layers, sections, disclaimer]
+      properties:
+        id: {type: string, const: buy-home}
+        title: {type: string}
+        version: {type: string}
+        disclaimer: {type: string}
+        requested_location:
+          $ref: '#/components/schemas/Location'
+        applied_layers:
+          type: array
+          items:
+            type: string
+            enum: [generic, country, state, county, city]
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+        unresolved_micro_checklist_ids:
+          type: array
+          description: References intentionally awaiting micro-level decomposition.
+          items: {type: string}

@@ -52,6 +52,24 @@ Files:
 - [`openapi/home-renting.yaml`](openapi/home-renting.yaml) — draft rental API contract.
 - [`docs/RENT_HOME_MANTECA.md`](docs/RENT_HOME_MANTECA.md) — scope, research basis and local decisions.
 
+### Leasing a property as a landlord in Manteca
+
+```text
+generic → United States → California → San Joaquin County → Manteca
+```
+
+```http
+GET /api/v1/checklists/lease-property-landlord?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
+```
+
+The landlord slice covers property readiness, pricing, compliant advertising, written screening criteria, consumer reports, applicant decisions, leases, disclosures, move-in funds, condition evidence, habitability, lawful entry, rent and termination controls, code compliance, utilities, notices and deposit accounting.
+
+Files:
+
+- [`data/macros/lease-property-landlord.json`](data/macros/lease-property-landlord.json) — layered landlord workflow and authoritative references.
+- [`data/micro/property-leasing-landlord.json`](data/micro/property-leasing-landlord.json) — reusable landlord sub-checklists.
+- [`openapi/property-leasing-landlord.yaml`](openapi/property-leasing-landlord.yaml) — draft landlord API contract.
+
 The composed response should merge only the matching overlays, deduplicate by stable semantic key, preserve originating jurisdiction and authoritative sources, apply conditions, and optionally expand micro-checklist steps.
 
 All housing content is marked `draft` and `high` risk. It is educational, must retain citations, and requires periodic review because laws, forms, fees, programs and local procedures change.
@@ -66,7 +84,7 @@ All housing content is marked `draft` and `high` risk. It is educational, must r
 | Administrative | Prepare for an appointment, submit an online form, pay a bill |
 | Shopping and household | Prepare a shopping list, receive a package, leave a room clean |
 | Events and work | Prepare for a meeting, host a small gathering |
-| Housing | Compare loans, inspect homes and rentals, review leases and disclosures, verify deposits, document condition, activate utilities, request repairs and complete closing or move-out |
+| Housing | Compare loans, inspect homes and rentals, review leases and disclosures, screen applicants, manage deposits, document condition, activate utilities, request repairs and complete closing or move-out |
 
 The proposed checklist steps and content-quality rules are documented in the [High-Level Design](docs/HIGH_LEVEL_DESIGN.md).
 
@@ -97,6 +115,7 @@ Example queries:
 GET /api/v1/checklists?type=micro&category=housing
 GET /api/v1/checklists/buy-home?country=US&state=CA&county=Contra%20Costa&city=San%20Ramon
 GET /api/v1/checklists/rent-home?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
+GET /api/v1/checklists/lease-property-landlord?country=US&state=CA&county=San%20Joaquin&city=Manteca&expand=micro
 ```
 
 The first implementation should prioritize read-only catalog endpoints. Composition can initially be deterministic and non-persistent.
@@ -138,68 +157,3 @@ HTTP API and Validation
 ```
 
 For the first release, version-controlled JSON or YAML files should be the source of truth.
-
-## Content decomposition rule
-
-A macro task should reference a micro checklist when any of these are true:
-
-- The task has multiple ordered actions.
-- Missing one substep can cause meaningful cost, delay, safety, legal, financial, privacy or housing risk.
-- The activity is reusable in another macro workflow.
-- The task requires evidence, comparison, verification or escalation.
-- The task has conditional branches or a specialized professional handoff.
-
-Unresolved references remain visible through `unresolved_micro_checklist_ids` until curated rather than being silently treated as atomic.
-
-## Delivery plan
-
-### Phase 0 — Documentation foundation
-
-- Define the product and architecture.
-- Identify initial micro activities.
-- Document checklist quality and composition rules.
-
-### Phase 1 — Data foundation
-
-- Add checklist JSON Schema.
-- Add curated micro checklists.
-- Add data validation and contribution guidance.
-- Validate jurisdiction inheritance and source metadata.
-
-### Phase 2 — Read-only API
-
-- Implement health, list, get, layer, and micro-checklist endpoints.
-- Add category, tag, location, phase, and text filtering.
-- Publish OpenAPI contracts.
-- Add unit, integration, and contract tests.
-
-### Phase 3 — Composition
-
-- Add deterministic macro-checklist composition.
-- Resolve jurisdiction layers, dependencies, and conditions.
-- Deduplicate and order steps.
-- Return unresolved micro references and source freshness metadata.
-
-### Phase 4 — Scale and curation
-
-- Add localization, indexed search, editorial tooling, analytics, and optional personalization.
-- Add scheduled source review for high-risk checklist content.
-
-## Documentation
-
-- [High-Level Design](docs/HIGH_LEVEL_DESIGN.md)
-- [Home-buying API contract](openapi/home-buying.yaml)
-- [Manteca rental research](docs/RENT_HOME_MANTECA.md)
-- [Home-renting API contract](openapi/home-renting.yaml)
-
-## Current status
-
-The project is in **Phase 0/1: design and initial curated data**. The housing slices supply researched contracts and seed data, but no web server has been selected or implemented yet.
-
-## Contributing
-
-Future checklist proposals should be evaluated for atomicity, reusability, clear actions, prerequisites, conditions, duplication, safety, authoritative sourcing, jurisdiction, freshness, stable IDs and versioning.
-
-## License
-
-A code license and a license for curated checklist content must be selected before the first public release.

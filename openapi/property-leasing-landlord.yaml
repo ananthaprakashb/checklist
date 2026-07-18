@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Property Leasing Checklist API
+  version: 0.1.0
+  description: Draft read-only contract for composing landlord leasing checklists by jurisdiction.
+servers:
+  - url: /api/v1
+paths:
+  /checklists/lease-property-landlord:
+    get:
+      summary: Get a composed residential property leasing checklist for a landlord
+      parameters:
+        - {name: country, in: query, schema: {type: string, example: US}}
+        - {name: state, in: query, schema: {type: string, example: CA}}
+        - {name: county, in: query, schema: {type: string, example: San Joaquin}}
+        - {name: city, in: query, schema: {type: string, example: Manteca}}
+        - name: expand
+          in: query
+          schema: {type: string, enum: [none, micro], default: none}
+      responses:
+        '200':
+          description: Composed checklist retaining source jurisdiction and references
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComposedChecklist'
+        '400': {description: Invalid or unsupported location hierarchy}
+  /checklists/lease-property-landlord/layers:
+    get:
+      summary: List available jurisdiction layers
+      responses:
+        '200':
+          description: Available layers
+  /micro-checklists/{id}:
+    get:
+      summary: Get a reusable micro checklist
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Micro checklist}
+        '404': {description: Micro checklist not found}
+components:
+  schemas:
+    ComposedChecklist:
+      type: object
+      required: [id, title, status, risk_level, resolved_layers, tasks]
+      properties:
+        id: {type: string, const: lease-property-landlord}
+        title: {type: string}
+        status: {type: string, enum: [draft, reviewed, published, deprecated]}
+        risk_level: {type: string, enum: [low, medium, high]}
+        educational_notice: {type: string}
+        location:
+          type: object
+          properties:
+            country: {type: string}
+            state: {type: string}
+            county: {type: string}
+            city: {type: string}
+        resolved_layers:
+          type: array
+          items: {type: string}
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComposedTask'
+        unresolved_micro_checklist_ids:
+          type: array
+          items: {type: string}
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+    ComposedTask:
+      type: object
+      required: [sequence, phase, semantic_key, title, source_layer]
+      properties:
+        sequence: {type: integer}
+        phase: {type: string}
+        semantic_key: {type: string}
+        title: {type: string}
+        condition: {type: string}
+        micro_checklist_id: {type: string}
+        source_layer: {type: string}
+        source_location: {type: object, additionalProperties: true}
+        micro_checklist:
+          $ref: '#/components/schemas/MicroChecklist'
+    MicroChecklist:
+      type: object
+      required: [id, title, steps]
+      properties:
+        id: {type: string}
+        title: {type: string}
+        steps:
+          type: array
+          items: {type: string}
+    Source:
+      type: object
+      required: [title, authority, url]
+      properties:
+        title: {type: string}
+        authority: {type: string}
+        url: {type: string, format: uri}

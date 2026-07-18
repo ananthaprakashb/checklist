@@ -1,0 +1,310 @@
+{
+  "category": "housing",
+  "topic": "home-renting",
+  "version": "0.1.0",
+  "status": "draft",
+  "risk_level": "high",
+  "checklists": [
+    {
+      "id": "define-rental-needs",
+      "title": "Define rental needs",
+      "steps": [
+        "Choose acceptable cities, neighborhoods and commute limits.",
+        "List required bedrooms, bathrooms, accessibility features and storage.",
+        "Record pet, parking, charging, yard and work-from-home needs.",
+        "Separate must-haves from preferences and deal-breakers.",
+        "Set target move-in date and expected lease duration."
+      ]
+    },
+    {
+      "id": "build-rental-budget",
+      "title": "Build an all-in rental budget",
+      "steps": [
+        "Set a sustainable monthly housing limit based on net income and other obligations.",
+        "Add recurring utilities, internet, renters insurance, parking, pet costs and commuting.",
+        "Add one-time application fees, deposit, first rent, moving and setup costs.",
+        "Reserve an emergency buffer for overlapping rent or delayed deposit return.",
+        "Compare candidates using total monthly and move-in cost, not advertised rent alone."
+      ]
+    },
+    {
+      "id": "prepare-rental-application",
+      "title": "Prepare a rental application packet",
+      "steps": [
+        "Prepare government identification and contact information.",
+        "Collect recent income or employment evidence appropriate to the applicant.",
+        "Prepare prior addresses, landlord contacts and rental dates.",
+        "Prepare references and co-signer information if needed.",
+        "Redact unnecessary sensitive data until a verified recipient and secure method are confirmed.",
+        "Keep a dated copy of every submitted application and authorization."
+      ]
+    },
+    {
+      "id": "search-rental-listings",
+      "title": "Search and track rental listings",
+      "steps": [
+        "Search multiple reputable listing and property-management sources.",
+        "Record address, contact, rent, deposit, fees, availability and source URL.",
+        "Flag unusually low prices, copied descriptions, pressure tactics and remote-only access.",
+        "Confirm whether the unit is still available before sharing sensitive information.",
+        "Track viewing, application and follow-up status in one place."
+      ]
+    },
+    {
+      "id": "prevent-rental-scam",
+      "title": "Prevent a rental scam",
+      "steps": [
+        "Confirm the full property address and inspect the actual unit or use a trusted local representative.",
+        "Verify the landlord, owner or property manager through independent records and contact channels.",
+        "Confirm the person showing the unit is authorized to lease it.",
+        "Search the address and photos for conflicting listings or prices.",
+        "Do not pay before reviewing the unit, written terms and recipient identity.",
+        "Avoid irreversible payment methods and independently verify changed payment instructions.",
+        "Retain the listing, messages, receipts and signed documents."
+      ]
+    },
+    {
+      "id": "inspect-rental-unit",
+      "title": "Inspect a rental unit before applying",
+      "steps": [
+        "Visit at a realistic time and evaluate noise, access, lighting, parking and surroundings.",
+        "Test doors, windows, locks, plumbing, hot water, outlets, lights and included appliances.",
+        "Look for leaks, moisture, mold-like growth, pests, damaged surfaces and unsafe conditions.",
+        "Confirm smoke and carbon-monoxide alarms and usable exits.",
+        "Ask what will be repaired or replaced before occupancy and require promises in writing.",
+        "Confirm storage, mail, laundry, trash, guest, pet and parking arrangements."
+      ]
+    },
+    {
+      "id": "compare-rental-options",
+      "title": "Compare rental options",
+      "steps": [
+        "Calculate total move-in and recurring cost for each candidate.",
+        "Score must-haves, commute, safety, condition, management responsiveness and flexibility.",
+        "Compare lease length, renewal, rent-change, early-termination and subletting terms.",
+        "Compare utility responsibility, parking, pets, maintenance and included services.",
+        "Record unresolved questions and obtain written answers before choosing."
+      ]
+    },
+    {
+      "id": "submit-rental-application",
+      "title": "Submit a rental application safely",
+      "steps": [
+        "Verify the recipient and application portal before entering personal information.",
+        "Read screening authorizations and fee terms before consenting.",
+        "Provide accurate, consistent information and explain material gaps when appropriate.",
+        "Use a traceable payment method and request a receipt for every fee.",
+        "Ask when and how the decision will be communicated.",
+        "Retain the completed application, notices and report-related correspondence."
+      ]
+    },
+    {
+      "id": "review-rental-lease",
+      "title": "Review a rental lease",
+      "steps": [
+        "Verify the parties, property address, unit, start date, term and possession date.",
+        "Confirm rent amount, due date, accepted payment methods, grace terms and late fees.",
+        "Review deposit, application, move-in, parking, pet, utility and other charges.",
+        "Review repair reporting, entry, alterations, guests, occupants, smoking, pets and insurance.",
+        "Review renewal, rent-change, notice, early-termination, assignment and subletting terms.",
+        "Read every addendum and incorporated rule before signing.",
+        "Resolve blanks, contradictions and verbal promises in writing.",
+        "Obtain a complete signed copy and inventory of keys or access devices."
+      ]
+    },
+    {
+      "id": "verify-move-in-funds",
+      "title": "Verify rental move-in funds",
+      "steps": [
+        "Request an itemized written statement of rent, deposit and every move-in charge.",
+        "Match each charge to the lease and applicable limits.",
+        "Verify the payee and instructions using an independent known contact.",
+        "Use a traceable method and avoid cash without an immediate signed receipt.",
+        "Record the payment date, amount, purpose, transaction reference and recipient.",
+        "Store receipts with the signed lease."
+      ]
+    },
+    {
+      "id": "document-move-in-condition",
+      "title": "Document move-in condition",
+      "steps": [
+        "Before moving belongings in, photograph and video every room and exterior area included in the tenancy.",
+        "Capture floors, walls, ceilings, doors, windows, fixtures, appliances, meters and existing damage.",
+        "Test included systems and record anything not working.",
+        "Complete the landlord's condition form or create a room-by-room written inventory.",
+        "Send the dated record through a traceable channel and request acknowledgment.",
+        "Preserve original files and metadata through the tenancy."
+      ]
+    },
+    {
+      "id": "activate-rental-utilities",
+      "title": "Activate rental utilities",
+      "steps": [
+        "List every service and identify whether landlord, tenant or association controls it.",
+        "Confirm provider, account start date, deposit, identification and lease-document requirements.",
+        "Schedule electricity, gas, water, sewer, waste and internet to avoid a service gap.",
+        "Record meter readings when responsibility begins.",
+        "Save account numbers, confirmations, rates and first-bill dates."
+      ]
+    },
+    {
+      "id": "obtain-renters-insurance",
+      "title": "Evaluate renters insurance",
+      "steps": [
+        "Confirm whether the lease requires coverage and any minimum limits or interested-party notation.",
+        "Estimate personal-property replacement value and important exclusions.",
+        "Compare liability, loss-of-use, deductible and optional coverage.",
+        "Ask how flood, earthquake, business property, jewelry, pets or roommates are handled.",
+        "Bind coverage effective no later than possession and retain proof."
+      ]
+    },
+    {
+      "id": "organize-rental-records",
+      "title": "Organize rental records",
+      "steps": [
+        "Store the signed lease, addenda, disclosures and condition report.",
+        "Keep rent, deposit, fee and utility receipts.",
+        "Keep repair requests, notices, inspection records and communications chronologically.",
+        "Back up photos and video outside the primary device.",
+        "Record important deadlines for renewal, notice and move-out."
+      ]
+    },
+    {
+      "id": "request-rental-repair",
+      "title": "Request and track a rental repair",
+      "steps": [
+        "Document the condition with date, location, symptoms and photos or video.",
+        "Report urgent hazards immediately using the lease's emergency method.",
+        "Send a clear written request through a traceable channel.",
+        "State access constraints, affected services and reasonable contact information.",
+        "Track responses, appointments, entry and work performed.",
+        "Escalate through authoritative local resources before using legal remedies without guidance.",
+        "Preserve all evidence and related expenses."
+      ]
+    },
+    {
+      "id": "prepare-rental-move-out",
+      "title": "Prepare to move out of a rental",
+      "steps": [
+        "Review lease and applicable notice requirements before selecting the move-out date.",
+        "Give written notice through an accepted traceable method.",
+        "Request any available pre-move-out inspection and correction opportunity.",
+        "Repair tenant-caused damage where appropriate and clean to the documented move-in baseline.",
+        "Photograph and video the empty unit after cleaning.",
+        "Return all keys and devices and obtain written confirmation of possession return.",
+        "Provide a forwarding address and track deposit accounting and refund deadlines.",
+        "Close tenant-held utilities and retain final bills."
+      ]
+    },
+    {
+      "id": "verify-application-screening-fee",
+      "title": "Verify a California application screening fee",
+      "steps": [
+        "Ask for the current fee amount and an itemization of intended screening costs.",
+        "Verify the fee does not exceed the current legally adjusted maximum.",
+        "Ask how many applications are being considered and whether screening will actually be performed.",
+        "Request and retain a receipt.",
+        "Request any report copy or unused-fee refund available under current law.",
+        "Keep the application, authorization and decision notice together."
+      ]
+    },
+    {
+      "id": "prepare-reusable-screening-report",
+      "title": "Prepare a reusable tenant screening report",
+      "steps": [
+        "Obtain the report from a qualifying consumer reporting agency or compliant service.",
+        "Verify it is current enough for the applicable rule.",
+        "Confirm it includes the required applicant, employment, rental-history and report information.",
+        "Make it available to the landlord at no access cost where the mechanism requires that.",
+        "Ask whether the landlord accepts reusable reports before relying on it.",
+        "Retain proof of delivery and any additional screening authorization."
+      ]
+    },
+    {
+      "id": "verify-security-deposit",
+      "title": "Verify a California rental security deposit",
+      "steps": [
+        "Identify every payment treated as security regardless of its label.",
+        "Compare the total to the current general limit and verify any statutory exception claimed.",
+        "Confirm permitted uses and that no security is characterized as nonrefundable.",
+        "Record the amount and payment evidence in the lease and receipt.",
+        "Document move-in condition to establish the baseline.",
+        "Calendar move-out inspection and deposit-accounting rights."
+      ]
+    },
+    {
+      "id": "inspect-rental-habitability",
+      "title": "Inspect basic rental habitability",
+      "steps": [
+        "Confirm weather protection and absence of major active leaks.",
+        "Test hot and cold water, drainage, toilet and sewage function.",
+        "Test electrical lighting, outlets and visible safety conditions.",
+        "Confirm heating and required utilities can operate.",
+        "Check locks, doors, windows, smoke alarms and carbon-monoxide alarms.",
+        "Look for significant pests, sanitation hazards, mold-like growth and unsafe stairs or railings.",
+        "Document deficiencies and obtain written repair commitments before occupancy when possible."
+      ]
+    },
+    {
+      "id": "identify-housing-complaint-channel",
+      "title": "Identify the correct housing complaint channel",
+      "steps": [
+        "Classify the issue as emergency, crime, immediate safety, housing-code, environmental-health, discrimination or private lease dispute.",
+        "Use emergency services only for immediate threats to life or property.",
+        "Check whether city code enforcement covers the physical condition.",
+        "Check whether county environmental health covers the condition or facility type.",
+        "Use fair-housing resources for discrimination and accommodation issues.",
+        "Use court self-help, legal aid or qualified counsel for private legal disputes.",
+        "Prepare address, dates, evidence, prior notices and requested resolution before contacting an agency."
+      ]
+    },
+    {
+      "id": "inspect-local-code-safety",
+      "title": "Inspect visible local code and safety concerns",
+      "steps": [
+        "Look for missing utilities, exposed wiring, unsafe plumbing or structural hazards.",
+        "Ask whether additions, converted garages or bedrooms were permitted.",
+        "Check property maintenance, debris, access and fire-safety concerns.",
+        "Confirm advertised parking, accessory structures and occupancy are authorized by the lease.",
+        "Document concerns and request written correction or permit information.",
+        "Use the local code-enforcement channel for covered non-emergency violations."
+      ]
+    },
+    {
+      "id": "start-manteca-utility-service",
+      "title": "Start City of Manteca utility service",
+      "steps": [
+        "Confirm with the lease which city services must be placed in the tenant's name.",
+        "Prepare the City move-in application, government-issued identification and rental agreement copy.",
+        "Confirm the current deposit and accepted payment method directly with the City.",
+        "Submit the application through an official City channel and select the activation date.",
+        "Save confirmation, account number, deposit receipt and billing schedule.",
+        "Review delinquency, penalty and shutoff-assistance information."
+      ]
+    },
+    {
+      "id": "verify-rental-utility-responsibility",
+      "title": "Verify rental utility responsibility",
+      "steps": [
+        "List water, sewer, garbage, electricity, gas, internet, landscaping and association services.",
+        "For each service, identify account holder, payer, meter type and billing method.",
+        "Ask whether charges are direct-metered, allocated, shared or passed through.",
+        "Review late fees, service interruptions and landlord access to billing data.",
+        "Put every allocation and included service in the lease or addendum.",
+        "Record starting meter readings where applicable."
+      ]
+    },
+    {
+      "id": "learn-local-waste-rules",
+      "title": "Learn local residential waste rules",
+      "steps": [
+        "Confirm collection day and which carts belong to the unit.",
+        "Learn placement and removal times and permitted materials.",
+        "Confirm who requests replacement carts, bulky pickup or extra service.",
+        "Ask whether only the utility account holder may request special services.",
+        "Store the provider contact and holiday schedule."
+      ]
+    }
+  ],
+  "disclaimer": "Educational content only. Verify current rental law and local procedures with official sources and qualified professionals."
+}

@@ -1,8 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/**/*.js": {
-      "includeFiles": "data/**/*.json"
+    "api/[...path].js": {
+      "includeFiles": [
+        "data/macros/**/*.json",
+        "data/micro/**/*.json",
+        "data/catalogs/**/*.json"
+      ]
     }
   }
 }

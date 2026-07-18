@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ShareCapsule location-aware checklists for residents, homeowners, renters and landlords.">
+  <title>ShareCapsule Checklist API</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header>
+    <p class="eyebrow">SHARECAPSULE.APP</p>
+    <h1>Local checklists, composed for where you live</h1>
+    <p>Explore researched activities and combine generic, country, state, county and city guidance into one actionable checklist.</p>
+  </header>
+
+  <main>
+    <section class="controls" aria-label="Checklist controls">
+      <label>Checklist
+        <select id="checklist"></select>
+      </label>
+      <label>Country <input id="country" value="US"></label>
+      <label>State <input id="state" value="CA"></label>
+      <label>County <input id="county" value="Contra Costa"></label>
+      <label>City <input id="city" value="San Ramon"></label>
+      <label class="toggle"><input id="expand" type="checkbox" checked> Expand sub-checklists</label>
+      <button id="compose" type="button">Build checklist</button>
+    </section>
+
+    <section id="status" class="status" aria-live="polite">Loading catalog…</section>
+    <section id="result" class="result" hidden>
+      <div class="result-heading">
+        <div><p class="eyebrow">COMPOSED CHECKLIST</p><h2 id="title"></h2></div>
+        <button id="copy" type="button" class="secondary">Copy JSON</button>
+      </div>
+      <div id="warnings"></div>
+      <ol id="tasks"></ol>
+      <details><summary>Sources</summary><ul id="sources"></ul></details>
+      <details><summary>JSON response</summary><pre id="json"></pre></details>
+    </section>
+
+    <section class="api-note">
+      <h2>API-compatible data</h2>
+      <p>This static GitHub Pages deployment runs the deterministic composition engine in your browser. The repository also contains the Node HTTP server for deployment on a server platform.</p>
+    </section>
+  </main>
+
+  <footer>Educational checklists may require professional verification. Laws, forms, fees and local procedures can change.</footer>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

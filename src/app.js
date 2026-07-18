@@ -1,6 +1,7 @@
 import { createServer as createNodeServer } from 'node:http';
 import { catalogSummary, loadCatalog } from './catalog.js';
 import { composeChecklist, parseLocation } from './composition.js';
+import { globalActivities, globalActivityById } from './global-activities.js';
 
 const JSON_LIMIT = 1024 * 1024;
 
@@ -17,11 +18,15 @@ function sendJson(response, status, payload) {
 
 function publicChecklist(item) {
   const { layers, source_file, composition, ...summary } = item;
+  return { ...summary, source_file, layer_count: layers?.length ?? 0, composition };
+}
+
+function publicGlobalActivity(activity) {
+  const { tasks, ...summary } = activity;
   return {
     ...summary,
-    source_file,
-    layer_count: layers?.length ?? 0,
-    composition
+    task_count: tasks.length,
+    subtask_count: tasks.reduce((total, task) => total + task.subtasks.length, 0)
   };
 }
 
@@ -55,7 +60,6 @@ function checklistList(catalog, url) {
   const status = url.searchParams.get('status');
   const risk = url.searchParams.get('risk_level');
   const query = url.searchParams.get('q')?.toLocaleLowerCase('en-US');
-
   return catalog.checklists
     .filter((item) => matches(item.type ?? 'macro', type))
     .filter((item) => matches(item.status, status))
@@ -69,7 +73,6 @@ function activityList(catalog, url) {
   const priority = url.searchParams.get('priority');
   const category = url.searchParams.get('category');
   const buildStatus = url.searchParams.get('build_status');
-
   return catalog.activities.filter((item) => {
     const itemLocation = item.location ?? {};
     const locationMatch = Object.entries(location).every(([key, value]) => matches(itemLocation[key], value));
@@ -84,29 +87,58 @@ function routeId(pathname, prefix, suffix = '') {
   return id && !id.includes('/') ? decodeURIComponent(id) : null;
 }
 
+function globalRoute(pathname) {
+  const match = pathname.match(/^\/api\/v1\/global-activities\/([^/]+)(?:\/tasks(?:\/([^/]+)(?:\/subtasks)?)?)?$/);
+  if (!match) return null;
+  return { activityId: decodeURIComponent(match[1]), taskId: match[2] ? decodeURIComponent(match[2]) : null, subtasks: pathname.endsWith('/subtasks') };
+}
+
 export function createApp({ catalog = loadCatalog() } = {}) {
   return async function handler(request, response) {
     const url = new URL(request.url, 'http://localhost');
-
     if (request.method === 'OPTIONS') return sendJson(response, 204, {});
 
     try {
       if (request.method === 'GET' && url.pathname === '/api/v1/health') {
-        return sendJson(response, 200, { status: 'ok', service: 'checklist-api', ...catalogSummary(catalog) });
+        return sendJson(response, 200, {
+          status: 'ok',
+          service: 'checklist-api',
+          ...catalogSummary(catalog),
+          global_activity_count: globalActivities.length
+        });
+      }
+
+      if (request.method === 'GET' && url.pathname === '/api/v1/global-activities') {
+        const category = url.searchParams.get('category');
+        const query = url.searchParams.get('q')?.toLocaleLowerCase('en-US');
+        const items = globalActivities
+          .filter((item) => matches(item.category, category))
+          .filter((item) => !query || `${item.id} ${item.title} ${item.category}`.toLocaleLowerCase('en-US').includes(query))
+          .map(publicGlobalActivity);
+        return sendJson(response, 200, { items, count: items.length });
+      }
+
+      const global = globalRoute(url.pathname);
+      if (request.method === 'GET' && global) {
+        const activity = globalActivityById.get(global.activityId);
+        if (!activity) return sendJson(response, 404, { error: 'global_activity_not_found', id: global.activityId });
+        if (!url.pathname.includes('/tasks')) return sendJson(response, 200, activity);
+        if (!global.taskId) return sendJson(response, 200, { activity_id: activity.id, items: activity.tasks });
+        const task = activity.tasks.find((item) => item.id === global.taskId);
+        if (!task) return sendJson(response, 404, { error: 'global_activity_task_not_found', activity_id: activity.id, id: global.taskId });
+        if (global.subtasks) return sendJson(response, 200, { activity_id: activity.id, task_id: task.id, items: task.subtasks });
+        return sendJson(response, 200, { activity_id: activity.id, ...task });
       }
 
       if (request.method === 'GET' && url.pathname === '/api/v1/checklists') {
         return sendJson(response, 200, { items: checklistList(catalog, url) });
       }
-
       if (request.method === 'GET' && url.pathname === '/api/v1/activities') {
         return sendJson(response, 200, { items: activityList(catalog, url) });
       }
-
       if (request.method === 'GET' && url.pathname === '/api/v1/categories') {
         return sendJson(response, 200, { items: catalogSummary(catalog).categories });
       }
-
       if (request.method === 'GET' && url.pathname === '/api/v1/tags') {
         return sendJson(response, 200, { items: catalogSummary(catalog).tags });
       }
@@ -114,9 +146,7 @@ export function createApp({ catalog = loadCatalog() } = {}) {
       const microId = routeId(url.pathname, '/api/v1/micro-checklists/');
       if (request.method === 'GET' && microId) {
         const micro = catalog.microById.get(microId);
-        return micro
-          ? sendJson(response, 200, micro)
-          : sendJson(response, 404, { error: 'micro_checklist_not_found', id: microId });
+        return micro ? sendJson(response, 200, micro) : sendJson(response, 404, { error: 'micro_checklist_not_found', id: microId });
       }
 
       const layersId = routeId(url.pathname, '/api/v1/checklists/', '/layers');
@@ -131,11 +161,9 @@ export function createApp({ catalog = loadCatalog() } = {}) {
       if (request.method === 'GET' && checklistId) {
         const checklist = catalog.checklistById.get(checklistId);
         if (!checklist) return sendJson(response, 404, { error: 'checklist_not_found', id: checklistId });
-
         const expandMicro = url.searchParams.get('expand') === 'micro';
         const location = parseLocation(url.searchParams);
-        const result = composeChecklist({ checklist, microById: catalog.microById, location, expandMicro });
-        return sendJson(response, 200, result);
+        return sendJson(response, 200, composeChecklist({ checklist, microById: catalog.microById, location, expandMicro }));
       }
 
       if (request.method === 'POST' && url.pathname === '/api/v1/checklists/compose') {
@@ -143,15 +171,13 @@ export function createApp({ catalog = loadCatalog() } = {}) {
         const checklist = catalog.checklistById.get(body.checklist_id);
         if (!body.checklist_id) return sendJson(response, 400, { error: 'checklist_id_required' });
         if (!checklist) return sendJson(response, 404, { error: 'checklist_not_found', id: body.checklist_id });
-
-        const result = composeChecklist({
+        return sendJson(response, 200, composeChecklist({
           checklist,
           microById: catalog.microById,
           location: body.location ?? {},
           context: body.context ?? {},
           expandMicro: body.expand === 'micro' || body.expand_micro === true
-        });
-        return sendJson(response, 200, result);
+        }));
       }
 
       return sendJson(response, 404, { error: 'route_not_found', path: url.pathname });
@@ -170,7 +196,6 @@ export function createServer(options) {
 }
 
 let defaultHandler;
-
 export default function handler(request, response) {
   defaultHandler ??= createApp();
   return defaultHandler(request, response);

@@ -1,0 +1,240 @@
+{
+  "version": "0.1.0",
+  "status": "draft",
+  "category": "housing",
+  "checklists": [
+    {
+      "id": "calculate-homeownership-budget",
+      "title": "Calculate an all-in homeownership budget",
+      "estimated_minutes": 45,
+      "steps": [
+        "Record reliable monthly take-home income and existing obligations.",
+        "Choose a conservative maximum monthly housing amount.",
+        "Estimate principal and interest under multiple rate scenarios.",
+        "Add property taxes, homeowners insurance, mortgage insurance, HOA dues, special assessments, utilities, and routine maintenance.",
+        "Add an allowance for major repairs and replacements.",
+        "Stress-test the budget for income interruption, insurance increases, tax changes, and urgent repairs.",
+        "Set a hard purchase-price and cash-to-close ceiling."
+      ]
+    },
+    {
+      "id": "prepare-mortgage-document-packet",
+      "title": "Prepare a mortgage application document packet",
+      "estimated_minutes": 90,
+      "steps": [
+        "Gather government-issued identification and residency documentation requested by the lender.",
+        "Gather recent pay statements and employment history.",
+        "Gather recent bank, brokerage, retirement, and other asset statements.",
+        "Gather tax returns, W-2s, 1099s, or business records applicable to the borrower.",
+        "Document debts, recurring obligations, rental or property income, and owned real estate.",
+        "Prepare explanations and evidence for large deposits, gifts, transfers, or unusual credit events.",
+        "Store documents in a secure, access-controlled folder and track lender submissions."
+      ]
+    },
+    {
+      "id": "compare-loan-estimates",
+      "title": "Compare U.S. Loan Estimates",
+      "estimated_minutes": 60,
+      "steps": [
+        "Request Loan Estimates for the same loan amount, product, lock period, and assumptions when practical.",
+        "Confirm borrower name, property, loan type, term, purpose, and amount.",
+        "Compare interest rate, APR, monthly principal and interest, and projected payment changes.",
+        "Compare points, lender credits, origination charges, services, taxes, insurance, and prepaid items.",
+        "Compare cash to close and verify down-payment assumptions.",
+        "Identify whether the rate is locked and record expiration and extension costs.",
+        "Ask each lender to explain material differences or unexpected fees.",
+        "Record the selected offer and why it best fits affordability and risk preferences."
+      ],
+      "sources": ["https://www.consumerfinance.gov/owning-a-home/loan-estimate/"]
+    },
+    {
+      "id": "conduct-home-inspection",
+      "title": "Conduct an independent home inspection",
+      "estimated_minutes": 180,
+      "steps": [
+        "Check inspector qualifications, scope, sample report, conflicts, references, and insurance.",
+        "Confirm the inspection covers visible structure, roof, exterior, interior, electrical, plumbing, HVAC, drainage, and safety conditions.",
+        "Schedule early enough to permit specialist follow-up within contract deadlines.",
+        "Attend the inspection when possible and ask how systems operate.",
+        "Request photographs, severity, safety impact, likely cause, and recommended specialist for each material issue.",
+        "Separate urgent safety defects, major capital items, maintenance items, and cosmetic issues.",
+        "Obtain repair estimates where decisions depend on cost.",
+        "Track negotiations, credits, repairs, contingency decisions, and final verification."
+      ],
+      "sources": ["https://www.consumerfinance.gov/owning-a-home/close/schedule-a-home-inspection/"]
+    },
+    {
+      "id": "review-hoa-package",
+      "title": "Review an HOA or common-interest-development package",
+      "estimated_minutes": 120,
+      "steps": [
+        "Read declaration, CC&Rs, bylaws, rules, architectural guidelines, and enforcement policies.",
+        "Review current dues, recent increases, delinquency levels, collection policy, and pending special assessments.",
+        "Review budget, reserve study, reserve funding, insurance, financial statements, and recent audits.",
+        "Review board and member meeting minutes for recurring defects, disputes, projects, and financial concerns.",
+        "Check litigation, construction-defect claims, insurance claims, and lender eligibility concerns.",
+        "Verify rental, pet, parking, vehicle, solar, exterior-change, and home-business restrictions.",
+        "Confirm what the HOA and owner respectively maintain and insure.",
+        "Escalate unresolved legal, financial, or insurance concerns to qualified professionals before document contingencies expire."
+      ]
+    },
+    {
+      "id": "verify-real-estate-wire-instructions",
+      "title": "Verify real-estate wire instructions safely",
+      "estimated_minutes": 15,
+      "steps": [
+        "Treat emailed or changed wire instructions as unverified.",
+        "Use a previously verified phone number or in-person contact for the escrow or settlement holder.",
+        "Read back the receiving bank, account name, routing number, account number, and exact amount.",
+        "Confirm whether any last-minute change is legitimate using a second trusted channel.",
+        "Send a small test transfer first when permitted and useful.",
+        "Confirm receipt directly with the settlement holder.",
+        "Immediately contact the financial institution and law enforcement if fraud is suspected."
+      ]
+    },
+    {
+      "id": "review-closing-disclosure",
+      "title": "Review a U.S. Closing Disclosure",
+      "estimated_minutes": 60,
+      "steps": [
+        "Compare loan amount, product, interest rate, term, and monthly payment with the selected Loan Estimate.",
+        "Confirm whether the rate is fixed or adjustable and review any prepayment penalty or balloon payment.",
+        "Reconcile closing costs, lender credits, seller credits, deposits, prorations, and cash to close.",
+        "Verify taxes, insurance, escrow setup, HOA charges, and prepaid items.",
+        "Confirm names, property address, vesting information, and settlement contacts are accurate.",
+        "Ask for explanations and corrected documents for discrepancies before signing.",
+        "Verify final payment and wire instructions through a trusted channel."
+      ],
+      "sources": ["https://www.consumerfinance.gov/owning-a-home/mortgage-closing/"]
+    },
+    {
+      "id": "review-california-natural-hazard-disclosure",
+      "title": "Review California natural-hazard disclosures",
+      "estimated_minutes": 60,
+      "steps": [
+        "Confirm the Natural Hazard Disclosure identifies the correct parcel.",
+        "Review whether the parcel lies in mapped flood, dam-inundation, very-high fire, wildland fire, earthquake-fault, or seismic-hazard areas listed by the disclosure.",
+        "Do not treat the disclosure as a complete property-risk assessment; review current official maps and reports.",
+        "Ask insurers about availability, exclusions, deductibles, mitigation requirements, and realistic premiums before removing applicable contingencies.",
+        "Evaluate evacuation routes, drainage, slope, vegetation, soil, and adjacent hazards with relevant specialists when indicated.",
+        "Document how each material hazard changes price, insurance, maintenance, retrofit, emergency, and exit plans."
+      ],
+      "sources": ["https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1103.2."]
+    },
+    {
+      "id": "estimate-california-property-taxes-and-assessments",
+      "title": "Estimate California property taxes and special assessments",
+      "estimated_minutes": 45,
+      "steps": [
+        "Identify the parcel and current secured property-tax bill.",
+        "Separate the base ad valorem tax from voter-approved debt and direct assessments.",
+        "Identify Mello-Roos, community-facilities-district, landscape, lighting, school, or other parcel assessments.",
+        "Estimate taxes using the expected purchase price rather than the seller's current assessed value.",
+        "Estimate supplemental taxes caused by reassessment after purchase.",
+        "Confirm whether the lender's escrow estimate includes all recurring items and whether supplemental bills remain the owner's responsibility.",
+        "Keep a cash reserve for bills arriving after closing."
+      ]
+    },
+    {
+      "id": "review-contra-costa-property-tax-bill",
+      "title": "Review a Contra Costa County property-tax bill",
+      "estimated_minutes": 30,
+      "steps": [
+        "Match the assessor parcel number and property address.",
+        "Review land, improvement, and total assessed values.",
+        "Review the tax-rate area and all fixed or direct assessments.",
+        "Check installment due dates, delinquency dates, and payment status.",
+        "Identify whether the displayed bill is informational because a lender is expected to pay it.",
+        "Confirm how prorations appear in escrow documents.",
+        "Save the bill and payment evidence with closing records."
+      ],
+      "sources": ["https://www.contracosta.ca.gov/568/New-Property-Owners"]
+    },
+    {
+      "id": "estimate-contra-costa-supplemental-tax",
+      "title": "Estimate and prepare for Contra Costa supplemental property tax",
+      "estimated_minutes": 30,
+      "steps": [
+        "Use expected purchase value and the parcel's prior assessed value to estimate the supplemental assessment difference.",
+        "Account for the purchase date because it determines the months covered and whether more than one supplemental bill may result.",
+        "Use the county estimator or request clarification from the Assessor or Tax Collector.",
+        "Reserve cash separately from the ordinary annual tax and lender impound account.",
+        "Monitor mail and county records after closing because failure to receive a bill does not remove payment responsibility.",
+        "Review the assessed value and appeal process promptly if the value appears incorrect."
+      ],
+      "sources": ["https://www.contracosta.ca.gov/583/Reassessment","https://www.contracosta.ca.gov/568/New-Property-Owners"]
+    },
+    {
+      "id": "apply-contra-costa-homeowners-exemption",
+      "title": "Apply for the Contra Costa homeowner's exemption",
+      "estimated_minutes": 20,
+      "steps": [
+        "Confirm the home is the applicant's eligible principal residence.",
+        "Obtain the current claim form and instructions from the Contra Costa County Assessor.",
+        "Verify occupancy-date and filing-deadline requirements for the annual and any supplemental assessment.",
+        "Submit the claim through the approved channel and retain confirmation.",
+        "Check later assessment or tax records to confirm the exemption was applied.",
+        "Contact the Assessor promptly if the exemption is missing or facts change."
+      ],
+      "sources": ["https://www.contracosta.ca.gov/7595/Tax-FAQs"]
+    },
+    {
+      "id": "review-san-ramon-permit-history",
+      "title": "Review San Ramon permit history",
+      "estimated_minutes": 60,
+      "steps": [
+        "Confirm the parcel and address are within the City's permitting jurisdiction.",
+        "Request or search available building, electrical, mechanical, plumbing, planning, solar, pool, and code-enforcement records.",
+        "Compare permits with the current layout, listing, disclosures, inspection observations, and assessor data.",
+        "Check whether permits were issued, inspected, finalized, expired, withdrawn, or left open.",
+        "Investigate additions, garage conversions, bedroom or bathroom changes, decks, retaining walls, HVAC, panels, plumbing, pools, and solar systems.",
+        "Ask the City what correction, legalization, demolition, or new-permit process may apply; do not assume unpermitted work can be approved.",
+        "Estimate cost, timing, insurance, appraisal, financing, safety, and resale impact before contingency deadlines."
+      ],
+      "sources": ["https://www.sanramon.ca.gov/our_city/permit_center/frequently_asked_questions"]
+    },
+    {
+      "id": "verify-san-ramon-zoning",
+      "title": "Verify San Ramon zoning and land-use context",
+      "estimated_minutes": 45,
+      "steps": [
+        "Confirm city limits, parcel, zoning district, and applicable specific plan.",
+        "Review permitted use, setbacks, height, parking, lot coverage, accessory dwelling unit, and other relevant standards.",
+        "Identify overlays, design guidelines, easements, HOA restrictions, and Dougherty Valley-specific requirements when applicable.",
+        "Review nearby zoning and planned projects that could affect traffic, views, noise, services, or property use.",
+        "Describe intended additions, rental use, home business, or site changes to Planning staff and document the response.",
+        "Treat feasibility as unresolved until applicable planning, building, fire, utility, HOA, and title constraints are checked."
+      ],
+      "sources": ["https://www.sanramon.ca.gov/our_city/departments_and_divisions/community_development/planning_services/zoning_map"]
+    },
+    {
+      "id": "identify-san-ramon-utility-providers",
+      "title": "Identify San Ramon utility providers for an address",
+      "estimated_minutes": 20,
+      "steps": [
+        "Confirm the exact service address and parcel.",
+        "Identify the applicable water provider rather than assuming one provider serves all addresses.",
+        "Identify the applicable wastewater or sewer provider.",
+        "Confirm garbage, electricity, gas, internet, and any HOA-managed services.",
+        "Ask about account-transfer timing, deposits, inspections, meter access, unpaid-balance handling, and start dates.",
+        "Record provider contacts and schedule service activation around possession."
+      ],
+      "sources": ["https://www.sanramon.ca.gov/residents/new_resident_info"]
+    },
+    {
+      "id": "perform-final-home-walkthrough",
+      "title": "Perform a final home walk-through",
+      "estimated_minutes": 90,
+      "steps": [
+        "Bring the contract, repair agreement, inspection summary, disclosure updates, and included-items list.",
+        "Confirm the property is in the expected condition and agreed repairs appear complete.",
+        "Test accessible lights, outlets, appliances, plumbing fixtures, drains, HVAC, doors, windows, locks, garage equipment, and safety devices.",
+        "Check for new leaks, damage, removed fixtures, debris, pests, or occupancy issues.",
+        "Verify keys, remotes, codes, manuals, warranties, permits, and seller-provided records.",
+        "Photograph meter readings and material concerns.",
+        "Notify the agent and settlement team before closing when contractual resolution is needed."
+      ],
+      "sources": ["https://www.consumerfinance.gov/owning-a-home/close/close-the-deal/"]
+    }
+  ]
+}

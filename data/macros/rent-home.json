@@ -1,0 +1,138 @@
+{
+  "id": "rent-home",
+  "title": "Rent a home",
+  "type": "macro",
+  "version": "0.1.0",
+  "status": "draft",
+  "risk_level": "high",
+  "description": "A jurisdiction-aware checklist for finding, evaluating, leasing, moving into, living in, and moving out of a rental home.",
+  "composition": {
+    "strategy": "inherit-and-overlay",
+    "deduplicate_by": "semantic_key",
+    "order_by": ["phase", "sequence"],
+    "preserve_source_layer": true,
+    "expand_micro": true
+  },
+  "layers": [
+    {
+      "id": "rent-home-generic",
+      "level": "generic",
+      "location": null,
+      "tasks": [
+        {"sequence": 10, "phase": "plan", "semantic_key": "define-rental-needs", "title": "Define location, home type, size, accessibility, pet, parking and commute needs", "micro_checklist_id": "define-rental-needs"},
+        {"sequence": 20, "phase": "plan", "semantic_key": "build-rental-budget", "title": "Build an all-in rental budget including rent, deposits, utilities, insurance, parking, commuting and moving", "micro_checklist_id": "build-rental-budget"},
+        {"sequence": 30, "phase": "prepare", "semantic_key": "prepare-rental-application", "title": "Prepare identity, income, employment, rental-history and reference documents", "micro_checklist_id": "prepare-rental-application"},
+        {"sequence": 40, "phase": "search", "semantic_key": "search-rental-listings", "title": "Search multiple reputable rental sources and track candidates", "micro_checklist_id": "search-rental-listings"},
+        {"sequence": 50, "phase": "verify", "semantic_key": "prevent-rental-scam", "title": "Verify the property, landlord or agent and payment instructions before sending money", "micro_checklist_id": "prevent-rental-scam"},
+        {"sequence": 60, "phase": "evaluate", "semantic_key": "inspect-rental-unit", "title": "Inspect the unit, building, safety features, appliances, utilities and neighborhood", "micro_checklist_id": "inspect-rental-unit"},
+        {"sequence": 70, "phase": "evaluate", "semantic_key": "compare-rental-options", "title": "Compare shortlisted homes using total cost and suitability", "micro_checklist_id": "compare-rental-options"},
+        {"sequence": 80, "phase": "apply", "semantic_key": "submit-rental-application", "title": "Submit an accurate application and retain receipts and copies", "micro_checklist_id": "submit-rental-application"},
+        {"sequence": 90, "phase": "lease", "semantic_key": "review-rental-lease", "title": "Review every lease term, addendum, fee, rule and responsibility before signing", "micro_checklist_id": "review-rental-lease"},
+        {"sequence": 100, "phase": "lease", "semantic_key": "verify-move-in-funds", "title": "Verify move-in charges and use a traceable payment method", "micro_checklist_id": "verify-move-in-funds"},
+        {"sequence": 110, "phase": "move-in", "semantic_key": "document-move-in-condition", "title": "Create a dated move-in condition record with photos, video and written defects", "micro_checklist_id": "document-move-in-condition"},
+        {"sequence": 120, "phase": "move-in", "semantic_key": "activate-rental-utilities", "title": "Activate required utilities and services", "micro_checklist_id": "activate-rental-utilities"},
+        {"sequence": 130, "phase": "move-in", "semantic_key": "obtain-renters-insurance", "title": "Evaluate and obtain renters insurance if appropriate or required", "micro_checklist_id": "obtain-renters-insurance"},
+        {"sequence": 140, "phase": "tenancy", "semantic_key": "organize-rental-records", "title": "Keep the signed lease, notices, receipts, inspection evidence and communications", "micro_checklist_id": "organize-rental-records"},
+        {"sequence": 150, "phase": "tenancy", "semantic_key": "request-rental-repair", "title": "Report repairs in writing, document conditions and track responses", "micro_checklist_id": "request-rental-repair"},
+        {"sequence": 160, "phase": "move-out", "semantic_key": "prepare-rental-move-out", "title": "Follow notice, cleaning, inspection, key-return and deposit-recovery steps", "micro_checklist_id": "prepare-rental-move-out"}
+      ],
+      "sources": []
+    },
+    {
+      "id": "rent-home-us",
+      "level": "country",
+      "location": {"country": "US"},
+      "tasks": [
+        {"sequence": 210, "phase": "rights", "semantic_key": "review-federal-fair-housing", "title": "Review federal fair-housing protections and document suspected discrimination", "micro_checklist_id": "review-fair-housing-protections"},
+        {"sequence": 220, "phase": "apply", "semantic_key": "review-consumer-report-rights", "title": "Review tenant-screening and adverse-action information when a consumer report affects the decision", "micro_checklist_id": "review-tenant-screening-report"},
+        {"sequence": 230, "phase": "evaluate", "semantic_key": "check-lead-disclosure", "title": "For most pre-1978 housing, review required lead-based paint information", "condition": "property.year_built < 1978", "micro_checklist_id": "review-lead-paint-disclosure"},
+        {"sequence": 240, "phase": "assistance", "semantic_key": "verify-housing-assistance", "title": "If using rental assistance, verify program, inspection and landlord participation requirements", "condition": "household.uses_housing_assistance == true", "micro_checklist_id": "verify-rental-assistance"}
+      ],
+      "sources": [
+        {"title": "HUD Fair Housing", "authority": "U.S. Department of Housing and Urban Development", "url": "https://www.hud.gov/fairhousing"},
+        {"title": "Tenant Background Checks and Your Rights", "authority": "Federal Trade Commission", "url": "https://consumer.ftc.gov/articles/tenant-background-checks-your-rights"},
+        {"title": "Protect Your Family from Lead in Your Home", "authority": "U.S. Environmental Protection Agency", "url": "https://www.epa.gov/lead/protect-your-family-lead-your-home-real-estate-disclosure"}
+      ]
+    },
+    {
+      "id": "rent-home-us-ca",
+      "level": "state",
+      "location": {"country": "US", "state": "CA"},
+      "tasks": [
+        {"sequence": 310, "phase": "plan", "semantic_key": "review-ca-tenant-guide", "title": "Review current California tenant guidance before applying and signing", "micro_checklist_id": "review-jurisdiction-tenant-guide"},
+        {"sequence": 320, "phase": "apply", "semantic_key": "verify-ca-screening-fee", "title": "Verify the application-screening fee, receipt, permitted use and available report rights", "micro_checklist_id": "verify-application-screening-fee"},
+        {"sequence": 330, "phase": "apply", "semantic_key": "consider-reusable-screening-report", "title": "Ask whether a qualifying reusable tenant screening report is accepted", "micro_checklist_id": "prepare-reusable-screening-report"},
+        {"sequence": 340, "phase": "lease", "semantic_key": "verify-ca-security-deposit", "title": "Verify the security-deposit amount, exception claimed, permitted uses and payment evidence", "micro_checklist_id": "verify-security-deposit"},
+        {"sequence": 350, "phase": "lease", "semantic_key": "review-ca-required-disclosures", "title": "Review applicable California rental disclosures and notices", "micro_checklist_id": "review-rental-disclosures"},
+        {"sequence": 360, "phase": "lease", "semantic_key": "review-ca-rent-and-termination-rules", "title": "Identify whether state rent-increase and just-cause rules apply or an exemption is claimed", "micro_checklist_id": "review-rent-protection-applicability"},
+        {"sequence": 370, "phase": "evaluate", "semantic_key": "verify-ca-habitability", "title": "Check basic habitability, utilities, locks, smoke and carbon-monoxide alarms", "micro_checklist_id": "inspect-rental-habitability"},
+        {"sequence": 380, "phase": "rights", "semantic_key": "document-ca-repair-request", "title": "Use written, evidence-preserving repair communications and appropriate escalation resources", "micro_checklist_id": "request-rental-repair"},
+        {"sequence": 390, "phase": "move-out", "semantic_key": "request-ca-pre-move-out-inspection", "title": "After notice, consider requesting the statutory initial inspection before move-out", "micro_checklist_id": "request-pre-move-out-inspection"},
+        {"sequence": 400, "phase": "move-out", "semantic_key": "track-ca-deposit-return", "title": "Track the 21-day deposit accounting and preserve evidence for disputed deductions", "micro_checklist_id": "recover-security-deposit"}
+      ],
+      "sources": [
+        {"title": "Landlord-Tenant Issues", "authority": "California Department of Justice", "url": "https://oag.ca.gov/tenants"},
+        {"title": "California Civil Code section 1950.5", "authority": "California Legislative Information", "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.5"},
+        {"title": "California Civil Code section 1950.6", "authority": "California Legislative Information", "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.6"},
+        {"title": "California Tenants Guide", "authority": "California Department of Real Estate", "url": "https://www.dre.ca.gov/publications/ResourceGuidebook/gb10_movingin.html"}
+      ]
+    },
+    {
+      "id": "rent-home-us-ca-san-joaquin",
+      "level": "county",
+      "location": {"country": "US", "state": "CA", "county": "San Joaquin"},
+      "tasks": [
+        {"sequence": 510, "phase": "search", "semantic_key": "use-san-joaquin-fair-housing-resources", "title": "Review San Joaquin Fair Housing tenant resources and independently verify listing details", "micro_checklist_id": "use-local-fair-housing-resources"},
+        {"sequence": 520, "phase": "rights", "semantic_key": "contact-san-joaquin-fair-housing", "title": "Use free county fair-housing education or assistance for discrimination, lease or tenant-right questions", "micro_checklist_id": "prepare-housing-assistance-request"},
+        {"sequence": 530, "phase": "evaluate", "semantic_key": "check-san-joaquin-environmental-complaints", "title": "Identify the correct county or city complaint channel for environmental-health or unsafe-condition concerns", "micro_checklist_id": "identify-housing-complaint-channel"},
+        {"sequence": 540, "phase": "risk", "semantic_key": "check-san-joaquin-flood-risk", "title": "Review address-specific FEMA and local flood information and insurance implications", "micro_checklist_id": "check-property-flood-risk"}
+      ],
+      "sources": [
+        {"title": "Tenant Information", "authority": "San Joaquin Fair Housing", "url": "https://sjfairhousing.com/tenant-information/"},
+        {"title": "Free Rental List", "authority": "San Joaquin Fair Housing", "url": "https://sjfairhousing.com/rental-list/"},
+        {"title": "Environmental Health Complaints", "authority": "San Joaquin County", "url": "https://permits.sjgov.org/Departments/Environmental-Health/Complaints"},
+        {"title": "FEMA Flood Map Service Center", "authority": "Federal Emergency Management Agency", "url": "https://msc.fema.gov/portal/home"}
+      ]
+    },
+    {
+      "id": "rent-home-us-ca-san-joaquin-manteca",
+      "level": "city",
+      "location": {"country": "US", "state": "CA", "county": "San Joaquin", "city": "Manteca"},
+      "tasks": [
+        {"sequence": 610, "phase": "verify", "semantic_key": "verify-manteca-property-and-agent", "title": "Inspect and approve the actual unit and verify the person authorized to rent it before paying", "micro_checklist_id": "prevent-rental-scam"},
+        {"sequence": 620, "phase": "evaluate", "semantic_key": "inspect-manteca-code-safety", "title": "Check for visible housing-code, utility, unpermitted-improvement and property-maintenance concerns", "micro_checklist_id": "inspect-local-code-safety"},
+        {"sequence": 630, "phase": "move-in", "semantic_key": "start-manteca-city-utilities", "title": "Confirm who must open City water, sewer and solid-waste service and submit the move-in application when tenant-responsible", "micro_checklist_id": "start-manteca-utility-service"},
+        {"sequence": 640, "phase": "lease", "semantic_key": "confirm-manteca-utility-allocation", "title": "Document which utilities are landlord-paid, tenant-paid, shared or billed through a ratio system", "micro_checklist_id": "verify-rental-utility-responsibility"},
+        {"sequence": 650, "phase": "move-in", "semantic_key": "learn-manteca-trash-rules", "title": "Confirm collection day, cart placement and account-holder requirements for city services", "micro_checklist_id": "learn-local-waste-rules"},
+        {"sequence": 660, "phase": "rights", "semantic_key": "route-manteca-housing-complaint", "title": "Route landlord-tenant disputes to fair-housing or legal resources and code or safety violations to the proper city channel", "micro_checklist_id": "identify-housing-complaint-channel"},
+        {"sequence": 670, "phase": "household", "semantic_key": "verify-manteca-school-assignment", "title": "For school-age children, verify address-specific school assignment directly with the district", "condition": "household.has_school_age_children == true", "micro_checklist_id": "verify-school-assignment"},
+        {"sequence": 680, "phase": "move-out", "semantic_key": "stop-manteca-utility-service", "title": "If the utility account is in the tenant's name, submit the city move-out request and retain the final bill", "micro_checklist_id": "stop-local-utility-service"}
+      ],
+      "sources": [
+        {"title": "Utility Services - Start New Service", "authority": "City of Manteca", "url": "https://www.manteca.gov/departments/finance-department/utility-information"},
+        {"title": "Utility Services", "authority": "City of Manteca", "url": "https://www.manteca.gov/departments/public-works/utility-services"},
+        {"title": "Code Enforcement", "authority": "City of Manteca", "url": "https://www.manteca.gov/departments/police-department/services-division/code-enforcement"},
+        {"title": "City Attorney FAQs", "authority": "City of Manteca", "url": "https://www.manteca.gov/departments/city-attorney/frequently-asked-questions"},
+        {"title": "Residential Trash Collection", "authority": "City of Manteca", "url": "https://www.manteca.gov/departments/public-works/solid-waste-division/residential-trash-collection"},
+        {"title": "Discontinue Utility Service", "authority": "City of Manteca", "url": "https://www.manteca.gov/departments/finance-department/utility-information/discontinue-service"}
+      ]
+    }
+  ],
+  "unresolved_micro_checklist_ids": [
+    "review-fair-housing-protections",
+    "review-tenant-screening-report",
+    "review-lead-paint-disclosure",
+    "verify-rental-assistance",
+    "review-jurisdiction-tenant-guide",
+    "review-rental-disclosures",
+    "review-rent-protection-applicability",
+    "request-pre-move-out-inspection",
+    "recover-security-deposit",
+    "use-local-fair-housing-resources",
+    "prepare-housing-assistance-request",
+    "check-property-flood-risk",
+    "verify-school-assignment",
+    "stop-local-utility-service"
+  ],
+  "disclaimer": "Educational checklist only. Rental laws, fees, forms, programs and local procedures change. Verify current requirements with the relevant authority and qualified professionals."
+}

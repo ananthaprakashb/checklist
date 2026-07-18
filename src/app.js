@@ -168,3 +168,10 @@ export function createApp({ catalog = loadCatalog() } = {}) {
 export function createServer(options) {
   return createNodeServer(createApp(options));
 }
+
+let defaultHandler;
+
+export default function handler(request, response) {
+  defaultHandler ??= createApp();
+  return defaultHandler(request, response);
+}

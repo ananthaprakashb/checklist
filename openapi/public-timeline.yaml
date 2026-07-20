@@ -1,0 +1,69 @@
+openapi: 3.1.0
+info:
+  title: Checklist Public Reminder Timeline API
+  version: 0.1.0
+  description: Source-backed, location-aware public deadline timelines. California is the first supported state.
+paths:
+  /api/v1/reminders/public/timeline:
+    get:
+      summary: Get a public deadline timeline
+      parameters:
+        - {name: country, in: query, schema: {type: string, default: US}}
+        - {name: state, in: query, schema: {type: string, default: CA}}
+        - {name: county, in: query, schema: {type: string}}
+        - {name: city, in: query, schema: {type: string}}
+        - {name: timezone, in: query, schema: {type: string}}
+        - {name: category, in: query, schema: {type: array, items: {type: string}}, style: form, explode: true}
+      responses:
+        '200':
+          description: Timeline response or unsupported-region response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/TimelineResponse'}
+    post:
+      summary: Resolve a timeline from structured location context
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country: {type: string, example: US}
+                state: {type: string, example: CA}
+                county: {type: string, example: Contra Costa}
+                city: {type: string, example: San Ramon}
+                timezone: {type: string, example: America/Los_Angeles}
+                categories:
+                  type: array
+                  items: {type: string}
+      responses:
+        '200':
+          description: Timeline response or unsupported-region response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/TimelineResponse'}
+components:
+  schemas:
+    TimelineResponse:
+      type: object
+      required: [supported]
+      properties:
+        supported: {type: boolean}
+        reason: {type: string}
+        registryVersion: {type: string}
+        generatedAt: {type: string, format: date-time}
+        region: {type: object, additionalProperties: true}
+        notice: {type: string}
+        countyOptions:
+          type: array
+          items: {type: object, additionalProperties: true}
+        deadlines:
+          type: array
+          items:
+            type: object
+            required: [id, title, date, category, source]
+            additionalProperties: true
+        conditional:
+          type: array
+          items: {type: object, additionalProperties: true}

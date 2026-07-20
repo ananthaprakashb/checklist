@@ -2,6 +2,7 @@ import { createServer as createNodeServer } from 'node:http';
 import { catalogSummary, loadCatalog } from './catalog.js';
 import { composeChecklist, parseLocation } from './composition.js';
 import { globalActivities, globalActivityById } from './global-activities.js';
+import { publicTimeline, timelineRegistrySummary } from './public-timeline.js';
 
 const JSON_LIMIT = 1024 * 1024;
 
@@ -93,6 +94,17 @@ function globalRoute(pathname) {
   return { activityId: decodeURIComponent(match[1]), taskId: match[2] ? decodeURIComponent(match[2]) : null, subtasks: pathname.endsWith('/subtasks') };
 }
 
+function timelineInputFromUrl(url) {
+  return {
+    country: url.searchParams.get('country') || 'US',
+    state: url.searchParams.get('state') || 'CA',
+    county: url.searchParams.get('county') || '',
+    city: url.searchParams.get('city') || '',
+    timezone: url.searchParams.get('timezone') || '',
+    categories: url.searchParams.getAll('category')
+  };
+}
+
 export function createApp({ catalog = loadCatalog() } = {}) {
   return async function handler(request, response) {
     const url = new URL(request.url, 'http://localhost');
@@ -104,8 +116,14 @@ export function createApp({ catalog = loadCatalog() } = {}) {
           status: 'ok',
           service: 'checklist-api',
           ...catalogSummary(catalog),
-          global_activity_count: globalActivities.length
+          global_activity_count: globalActivities.length,
+          public_timeline: timelineRegistrySummary()
         });
+      }
+
+      if (url.pathname === '/api/v1/reminders/public/timeline') {
+        if (request.method === 'GET') return sendJson(response, 200, publicTimeline(timelineInputFromUrl(url)));
+        if (request.method === 'POST') return sendJson(response, 200, publicTimeline(await readJsonBody(request)));
       }
 
       if (request.method === 'GET' && url.pathname === '/api/v1/global-activities') {
@@ -130,18 +148,10 @@ export function createApp({ catalog = loadCatalog() } = {}) {
         return sendJson(response, 200, { activity_id: activity.id, ...task });
       }
 
-      if (request.method === 'GET' && url.pathname === '/api/v1/checklists') {
-        return sendJson(response, 200, { items: checklistList(catalog, url) });
-      }
-      if (request.method === 'GET' && url.pathname === '/api/v1/activities') {
-        return sendJson(response, 200, { items: activityList(catalog, url) });
-      }
-      if (request.method === 'GET' && url.pathname === '/api/v1/categories') {
-        return sendJson(response, 200, { items: catalogSummary(catalog).categories });
-      }
-      if (request.method === 'GET' && url.pathname === '/api/v1/tags') {
-        return sendJson(response, 200, { items: catalogSummary(catalog).tags });
-      }
+      if (request.method === 'GET' && url.pathname === '/api/v1/checklists') return sendJson(response, 200, { items: checklistList(catalog, url) });
+      if (request.method === 'GET' && url.pathname === '/api/v1/activities') return sendJson(response, 200, { items: activityList(catalog, url) });
+      if (request.method === 'GET' && url.pathname === '/api/v1/categories') return sendJson(response, 200, { items: catalogSummary(catalog).categories });
+      if (request.method === 'GET' && url.pathname === '/api/v1/tags') return sendJson(response, 200, { items: catalogSummary(catalog).tags });
 
       const microId = routeId(url.pathname, '/api/v1/micro-checklists/');
       if (request.method === 'GET' && microId) {

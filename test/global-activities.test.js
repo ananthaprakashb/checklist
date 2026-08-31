@@ -59,7 +59,7 @@ test('common task patterns expose actionable subtasks', async () => {
   await withServer(async (baseUrl) => {
     const expected = [
       ['daily-task-planning', 'prioritize', /important/i],
-      ['grocery-shopping-list', 'build-list', /categor/i],
+      ['grocery-shopping-list', 'build-list', /type/i],
       ['meeting-agenda-follow-up', 'follow-up', /owner/i],
       ['employee-onboarding', 'prepare', /account/i],
       ['bug-report-triage', 'reproduce', /steps/i],

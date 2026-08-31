@@ -2,9 +2,21 @@ import { createServer as createNodeServer } from 'node:http';
 import { catalogSummary, loadCatalog } from './catalog.js';
 import { composeChecklist, parseLocation } from './composition.js';
 import { globalActivities, globalActivityById } from './global-activities.js';
+import { everydayActivityTemplates } from './everyday-activity-templates.js';
 import { publicTimeline, timelineRegistrySummary } from './public-timeline.js';
 
 const JSON_LIMIT = 1024 * 1024;
+const everydayActivityTemplateById = new Map(everydayActivityTemplates.map((activity) => [activity.id, activity]));
+const mergedGlobalActivities = [
+  ...globalActivities.map((activity) => {
+    const replacement = everydayActivityTemplateById.get(activity.id);
+    return replacement ? { ...replacement, rank: activity.rank } : activity;
+  }),
+  ...everydayActivityTemplates
+    .filter((activity) => !globalActivityById.has(activity.id))
+    .map((activity, index) => ({ ...activity, rank: globalActivities.length + index + 1 }))
+];
+const mergedGlobalActivityById = new Map(mergedGlobalActivities.map((activity) => [activity.id, activity]));
 
 function sendJson(response, status, payload) {
   response.writeHead(status, {
@@ -116,7 +128,7 @@ export function createApp({ catalog = loadCatalog() } = {}) {
           status: 'ok',
           service: 'checklist-api',
           ...catalogSummary(catalog),
-          global_activity_count: globalActivities.length,
+          global_activity_count: mergedGlobalActivities.length,
           public_timeline: timelineRegistrySummary()
         });
       }
@@ -129,7 +141,7 @@ export function createApp({ catalog = loadCatalog() } = {}) {
       if (request.method === 'GET' && url.pathname === '/api/v1/global-activities') {
         const category = url.searchParams.get('category');
         const query = url.searchParams.get('q')?.toLocaleLowerCase('en-US');
-        const items = globalActivities
+        const items = mergedGlobalActivities
           .filter((item) => matches(item.category, category))
           .filter((item) => !query || `${item.id} ${item.title} ${item.category}`.toLocaleLowerCase('en-US').includes(query))
           .map(publicGlobalActivity);
@@ -138,7 +150,7 @@ export function createApp({ catalog = loadCatalog() } = {}) {
 
       const global = globalRoute(url.pathname);
       if (request.method === 'GET' && global) {
-        const activity = globalActivityById.get(global.activityId);
+        const activity = mergedGlobalActivityById.get(global.activityId);
         if (!activity) return sendJson(response, 404, { error: 'global_activity_not_found', id: global.activityId });
         if (!url.pathname.includes('/tasks')) return sendJson(response, 200, activity);
         if (!global.taskId) return sendJson(response, 200, { activity_id: activity.id, items: activity.tasks });

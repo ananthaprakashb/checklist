@@ -23,12 +23,12 @@ async function withServer(run) {
   }
 }
 
-test('global activity catalog exposes 62 location-independent activities', async () => {
+test('global activity catalog exposes 66 location-independent activities', async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(`${baseUrl}/api/v1/global-activities`);
     assert.equal(response.status, 200);
     const body = await response.json();
-    assert.equal(body.count, 62);
+    assert.equal(body.count, 66);
     assert.equal(body.items.every((item) => item.scope === 'global' && item.location_specific === false), true);
     assert.equal(body.items.every((item) => item.task_count === 5), true);
   });
@@ -59,11 +59,16 @@ test('common task patterns expose actionable subtasks', async () => {
   await withServer(async (baseUrl) => {
     const expected = [
       ['daily-task-planning', 'prioritize', /important/i],
-      ['grocery-shopping-list', 'build-list', /categor/i],
+      ['grocery-shopping-list', 'build-list', /type/i],
       ['meeting-agenda-follow-up', 'follow-up', /owner/i],
       ['employee-onboarding', 'prepare', /account/i],
       ['bug-report-triage', 'reproduce', /steps/i],
-      ['assignment-tracker', 'submit', /submission/i]
+      ['assignment-tracker', 'submit', /submission/i],
+      ['party-birthday-planning', 'food-cake', /dietary/i],
+      ['weekend-chores-house-cleaning', 'clean-surfaces', /bathroom/i],
+      ['packing-checklist', 'essentials', /identification/i],
+      ['holiday-dinner-hosting', 'menu-timeline', /make-ahead/i],
+      ['road-trip-planning', 'vehicle-readiness', /tires/i]
     ];
 
     for (const [activityId, taskId, pattern] of expected) {
@@ -73,6 +78,17 @@ test('common task patterns expose actionable subtasks', async () => {
       assert.equal(body.items.length, 2);
       assert.equal(body.items.some((item) => pattern.test(item.title)), true);
     }
+  });
+});
+
+test('existing packing template keeps its stable id while using packing-specific tasks', async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/global-activities/packing-checklist`);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.equal(body.id, 'packing-checklist');
+    assert.equal(body.title, 'Create a reusable packing checklist');
+    assert.deepEqual(body.tasks.map((task) => task.id), ['trip-needs', 'essentials', 'clothing', 'toiletries-tech', 'final-check']);
   });
 });
 
@@ -86,6 +102,12 @@ test('global activity endpoints support category filtering, search, and 404s', a
 
     const searched = await fetch(`${baseUrl}/api/v1/global-activities?q=onboarding`);
     assert.equal((await searched.json()).count, 2);
+
+    const party = await fetch(`${baseUrl}/api/v1/global-activities?q=birthday`);
+    assert.equal((await party.json()).count, 1);
+
+    const roadTrip = await fetch(`${baseUrl}/api/v1/global-activities?q=road%20trip`);
+    assert.equal((await roadTrip.json()).count, 1);
 
     const missing = await fetch(`${baseUrl}/api/v1/global-activities/not-real`);
     assert.equal(missing.status, 404);
